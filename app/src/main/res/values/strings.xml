@@ -1,0 +1,45 @@
+<resources>
+
+    <string name="app_name">WatechPark</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="forgot_your_password">Forgot Your Password?</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="signedin">Stay signed in</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="title_activity_main_menu">MainMenu</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Watech Park</string>
+    <string name="menu_gallery">Order History</string>
+    <string name="menu_slideshow">Add A Car</string>
+    <string name="menu_tools">Manage Cars</string>
+    <string name="menu_share">Settings</string>
+    <string name="menu_send">Help</string>
+    <string name="preparing_your_parking_lot">Preparing Your Parking Lot ...</string>
+    <string name="park_smart">park smart</string>
+    <string name="copyright_u00a9_2019_watech_park_inc_all_rights_reserved">Copyright © 2019, Watech Park Inc. All rights reserved</string>
+    <string name="submit">Submit</string>
+    <string name="please_enter_your_account_email_address_or_phone_number_to_request_a_password_reset">Please enter your account email address or phone number to request a password reset.</string>
+    <string name="e_mail">E-mail</string>
+    <string name="phone">Phone #</string>
+    <string name="please_check_your_entered_service_after_submitting_for_a_verification_code">Please check your entered service after submitting for a verification code</string>
+    <string name="search">Search</string>
+    <string name="open">OPEN</string>
+    <string name="reserved">RESERVED</string>
+    <string name="occupied">OCCUPIED</string>
+    <string name="_1_70_mi">1.70 mi</string>
+    <string name="welcome_jane">Welcome! Jane</string>
+    <string name="pick_a_spot">Pick A Spot</string>
+    <string name="_1_54_mi">1.54 mi</string>
+    <string name="humber_college">Humber College</string>
+    <string name="vankirk_parking_lot">Vankirk Parking Lot</string>
+    <string name="_101_subway_crescent">101 Subway Crescent</string>
+
+</resources>
