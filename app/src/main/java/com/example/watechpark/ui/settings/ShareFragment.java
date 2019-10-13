@@ -1,4 +1,4 @@
-package com.example.watechpark.ui.share;
+package com.example.watechpark.ui.settings;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +29,7 @@ public class ShareFragment extends Fragment {
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
+
         });
         return root;
     }

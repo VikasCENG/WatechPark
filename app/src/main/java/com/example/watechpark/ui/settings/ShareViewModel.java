@@ -1,4 +1,4 @@
-package com.example.watechpark.ui.share;
+package com.example.watechpark.ui.settings;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,7 +9,7 @@ public class ShareViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
     public ShareViewModel() {
-
+        mText = new MutableLiveData<>();
 
     }
 
