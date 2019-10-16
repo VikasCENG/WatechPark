@@ -43,5 +43,9 @@
     <string name="_101_subway_crescent">101 Subway Crescent</string>
     <string name="theme_setting">Auto Theme (Day/Night)</string>
     <string name="recieve_notfications">Receive Notifications</string>
+    <string name="reservve">Reserve</string>
+    <string name="_1_91_mi">1.91 mi</string>
+    <string name="reserve">Reserve</string>
+
 
 </resources>
