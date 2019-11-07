@@ -59,12 +59,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/quicksand"
-        android:text="@string/username"
+        android:text="@string/e_mail_username"
         android:textColor="#424242"
         android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/editUser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.28"
+        app:layout_constraintHorizontal_bias="0.337"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText

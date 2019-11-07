@@ -1,5 +1,6 @@
 package com.example.watechpark;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ThrowOnExtraProperties;
 
 public class LoginRegister extends AppCompatActivity {
 
@@ -18,12 +27,43 @@ public class LoginRegister extends AppCompatActivity {
     protected Button button, button1, button2, button3;
     private EditText edit, edit1;
 
+
+    private FirebaseAuth mLoginAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findAllViews();
+
+        mLoginAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser mUser = mLoginAuth.getCurrentUser();
+                if (mLoginAuth != null) {
+                    Toast.makeText(LoginRegister.this, R.string.current_log, Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginRegister.this, R.string.please_login, Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        };
+
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch ((v.getId())) {
+                    case R.id.buttonReg:
+                        startActivity(new Intent(getApplicationContext(), Register.class));
+                        break;
+                }
+            }
+        });
 
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,8 +87,7 @@ public class LoginRegister extends AppCompatActivity {
             public void onClick(View v) {
                 switch ((v.getId())) {
                     case R.id.buttonLogin:
-
-                        startActivity(new Intent(getApplicationContext(), MainMenu.class));
+                        loginValidate();
 
                         break;
 
@@ -62,11 +101,38 @@ public class LoginRegister extends AppCompatActivity {
             public void onClick(View v) {
                 switch ((v.getId())) {
                     case R.id.buttonGoogle:
-                       google();
+                        google();
                 }
             }
         });
 
+    }
+
+
+
+    private void loginValidate() {
+        final String email = edit.getText().toString();
+        final String password = edit1.getText().toString();
+
+        if (edit.getText().toString().isEmpty()) {
+            edit.setError(getString(R.string.user_re1));
+            edit.requestFocus();
+        } else if (edit1.getText().toString().isEmpty()) {
+            edit1.setError(getString(R.string.pass_req1));
+            edit1.requestFocus();
+        } else {
+            mLoginAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(getApplicationContext(),getString(R.string.welcome_msg) + email, Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), MainMenu.class));
+                    } else {
+                        Toast.makeText(getApplicationContext(), R.string.TRY_AGAIN, Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
     }
 
     private void findAllViews() {

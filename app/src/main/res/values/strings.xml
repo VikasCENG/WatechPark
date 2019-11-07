@@ -46,6 +46,30 @@
     <string name="reservve">Reserve</string>
     <string name="_1_91_mi">1.91 mi</string>
     <string name="reserve">Reserve</string>
+    <string name="phone_num">Phone #</string>
+    <string name="name">Name</string>
+    <string name="full_name">Full Name</string>
+    <string name="e_mail1">E-mail</string>
+    <string name="create_account">Create Account</string>
+    <string name="name1">Name</string>
+    <string name="by_registering_you_accept_the_privacy_policy">By registering you accept the privacy policy</string>
+    <string name="register_label">Register.</string>
+    <string name="reg_user">Registering into Firebase...</string>
+    <string name="fail_reg">Failed to register...</string>
+    <string name="failed_reg">Failed to register...</string>
+    <string name="full_req">Full name required!</string>
+    <string name="phone_req">Phone number required!</string>
+    <string name="email_req">Email is required!</string>
+    <string name="user_req">Username is required!</string>
+    <string name="psw_req">Password is required!</string>
+    <string name="current_log">Currently logged in</string>
+    <string name="please_login">Please log in</string>
+    <string name="user_re1">Username is required!</string>
+    <string name="pass_req1">Password is required</string>
+    <string name="TRY_AGAIN">Try Again...</string>
+    <string name="welcome_toast">Welcome!</string>
+    <string name="welcome_msg">Welcome!</string>
+    <string name="e_mail_username">E-mail/Username</string>
 
 
 </resources>
