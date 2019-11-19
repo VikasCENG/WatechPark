@@ -38,8 +38,15 @@ public class Register extends AppCompatActivity {
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        setSupportActionBar(toolBar);
+
         findAllViews();
+
+        setSupportActionBar(toolBar);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         progressBar.setVisibility(View.GONE);
 
@@ -53,6 +60,13 @@ public class Register extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent i = new Intent(getApplicationContext(), LoginRegister.class);
+        startActivity(i);
+        return super.onOptionsItemSelected(item);
+    }
+
 
 
     private void registerValidate() {
@@ -61,6 +75,8 @@ public class Register extends AppCompatActivity {
         final String email = editEmail.getText().toString().trim();
         final String username = editUserName.getText().toString().trim();
         final String password = editPassword.getText().toString().trim();
+        Long time = System.currentTimeMillis()/1000;
+        final String timestamp = time.toString();
 
         if (fullName.isEmpty()) {
             editFullName.setError(getString(R.string.full_req));
@@ -82,9 +98,10 @@ public class Register extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
-                        TestUser user = new TestUser(fullName, phone, email, username, password);
+                        TestUsers user = new TestUsers(fullName, phone, email, username, password, timestamp);
 
                         FirebaseDatabase.getInstance().getReference("TestUsers").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                 .setValue(user);

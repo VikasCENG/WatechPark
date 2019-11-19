@@ -1,4 +1,4 @@
-package com.example.watechpark.ui.slideshow;
+package com.example.watechpark.ui.ParkingPasses;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,18 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.watechpark.R;
 
-public class SlideshowFragment extends Fragment {
+public class ParkingPassesFragment extends Fragment {
 
-    private SlideshowViewModel slideshowViewModel;
+    private ParkingPassesViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(SlideshowViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(this, new Observer<String>() {
+
+        homeViewModel =
+                ViewModelProviders.of(this).get(ParkingPassesViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_parkingpasses, container, false);
+        final TextView textView = root.findViewById(R.id.text_home);
+        homeViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

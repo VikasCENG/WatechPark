@@ -1,14 +1,14 @@
-package com.example.watechpark.ui.settings;
+package com.example.watechpark.ui.Help;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ShareViewModel extends ViewModel {
+public class HelpViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ShareViewModel() {
+    public HelpViewModel() {
         mText = new MutableLiveData<>();
 
     }

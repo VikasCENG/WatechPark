@@ -1,4 +1,4 @@
-package com.example.watechpark.ui.settings;
+package com.example.watechpark.ui.OrderHistory;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,22 +14,21 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.watechpark.R;
 
-public class ShareFragment extends Fragment {
+public class OrderHistoryFragment extends Fragment {
 
-    private ShareViewModel shareViewModel;
+    private OrderHistoryViewModel galleryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        shareViewModel =
-                ViewModelProviders.of(this).get(ShareViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_settings, container, false);
-        final TextView textView = root.findViewById(R.id.text_share);
-        shareViewModel.getText().observe(this, new Observer<String>() {
+        galleryViewModel =
+                ViewModelProviders.of(this).get(OrderHistoryViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_orderhistory, container, false);
+        final TextView textView = root.findViewById(R.id.text_gallery);
+        galleryViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-
         });
         return root;
     }

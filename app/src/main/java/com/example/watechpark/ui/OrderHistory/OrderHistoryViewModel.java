@@ -1,14 +1,14 @@
-package com.example.watechpark.ui.tools;
+package com.example.watechpark.ui.OrderHistory;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class ToolsViewModel extends ViewModel {
+public class OrderHistoryViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public ToolsViewModel() {
+    public OrderHistoryViewModel() {
         mText = new MutableLiveData<>();
 
     }

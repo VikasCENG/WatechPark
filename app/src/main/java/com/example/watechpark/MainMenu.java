@@ -1,13 +1,19 @@
 package com.example.watechpark;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.bottomappbar.BottomAppBar;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -15,6 +21,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -33,7 +41,10 @@ public class MainMenu extends AppCompatActivity {
 
     private ImageView i1,i2,i3;
     private Button b1,b2,b3;
-    private TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,t10, t11;
+    private TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,t10, t11, consumerID;
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser user;
 
 
     @Override
@@ -60,18 +71,26 @@ public class MainMenu extends AppCompatActivity {
         t9 = (TextView)findViewById(R.id.textView13);
         t10 = (TextView)findViewById(R.id.textView14);
         t11 = (TextView)findViewById(R.id.textView15);
-
-
-
-
+        consumerID = (TextView)findViewById(R.id.textViewID);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        BottomAppBar appbar = findViewById(R.id.bottomAppBar2);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        mAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+
+
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
@@ -82,6 +101,21 @@ public class MainMenu extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int id = item.getItemId();
+        if(id == R.id.action_acc){
+            Intent i = new Intent(getApplicationContext(), AccountManagement.class);
+            startActivity(i);
+
+        }else if(id == R.id.action_logout){
+             logOutUser();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -97,4 +131,31 @@ public class MainMenu extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    private void logOutUser(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Confirm Sign-Out");
+        builder.setMessage("Are you sure you want to log-out from this account?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mAuth.signOut();
+                finish();
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
+
+
 }

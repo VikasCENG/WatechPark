@@ -16,20 +16,23 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#424242"
+            android:background="#aed581"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main_menu" />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar2"
-        style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
-        android:layout_height="98dp"
+        android:layout_height="97dp"
         android:layout_gravity="bottom"
-        android:backgroundTint="#424242" />
+        android:background="#aed581"
+        app:itemIconSize="55dp"
+        app:itemIconTint="#424242"
+        app:itemTextColor="#F4F4F4"
+        app:menu="@menu/bottom_nav" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

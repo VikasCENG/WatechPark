@@ -135,9 +135,12 @@
 
     <CheckBox
         android:id="@+id/checkBox2"
-        android:layout_width="278dp"
+        android:layout_width="295dp"
         android:layout_height="20dp"
         android:layout_marginBottom="12dp"
+        android:background="#f4f4f4"
+        android:backgroundTint="#f4f4f4"
+        android:buttonTint="#90caf9"
         android:fontFamily="@font/quicksand"
         android:text="@string/by_registering_you_accept_the_privacy_policy"
         android:textColor="#424242"
@@ -174,8 +177,8 @@
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="409dp"
-        android:layout_height="wrap_content"
+        android:layout_width="377dp"
+        android:layout_height="48dp"
         android:background="#aed581"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -192,6 +195,7 @@
         android:fontFamily="@font/quicksand"
         android:text="@string/create_account"
         android:textAlignment="textStart"
+        android:textColor="#f4f4f4"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar2"

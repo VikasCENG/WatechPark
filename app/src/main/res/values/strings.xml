@@ -70,6 +70,16 @@
     <string name="welcome_toast">Welcome!</string>
     <string name="welcome_msg">Welcome!</string>
     <string name="e_mail_username">E-mail/Username</string>
+    <string name="request_token">474740183087-vgum9q27l7bgg3qjn9vd87krmktr02nt.apps.googleusercontent.com</string>
+    <string name="current">Currently signed in.</string>
+    <string name="forgot_2">Forgot Your Password?</string>
+    <string name="value_id">Value</string>
+    <string name="verification_code3">Verification Code</string>
+    <string name="new_pswd">New Password</string>
+    <string name="didn_not">Didn\'t get it?</string>
+    <string name="resend">Resend</string>
+    <string name="verify_pswd">Verify Your Password</string>
+    <string name="phone_num1">Phone #:</string>
 
 
 </resources>

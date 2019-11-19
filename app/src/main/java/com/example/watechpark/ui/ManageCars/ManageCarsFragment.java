@@ -1,4 +1,4 @@
-package com.example.watechpark.ui.tools;
+package com.example.watechpark.ui.ManageCars;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,15 +14,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.watechpark.R;
 
-public class ToolsFragment extends Fragment {
+public class ManageCarsFragment extends Fragment {
 
-    private ToolsViewModel toolsViewModel;
+    private ManageCarsViewModel toolsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         toolsViewModel =
-                ViewModelProviders.of(this).get(ToolsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_tools, container, false);
+                ViewModelProviders.of(this).get(ManageCarsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_managecars, container, false);
         final TextView textView = root.findViewById(R.id.text_tools);
         toolsViewModel.getText().observe(this, new Observer<String>() {
             @Override

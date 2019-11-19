@@ -1,11 +1,9 @@
-package com.example.watechpark.ui.home;
+package com.example.watechpark.ui.AddACar;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -16,18 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.watechpark.R;
 
-public class HomeFragment extends Fragment {
+public class AddACarFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private AddACarViewModel slideshowViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        slideshowViewModel =
+                ViewModelProviders.of(this).get(AddACarViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_addacar, container, false);
+        final TextView textView = root.findViewById(R.id.text_slideshow);
+        slideshowViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

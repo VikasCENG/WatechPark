@@ -1,14 +1,14 @@
-package com.example.watechpark.ui.gallery;
+package com.example.watechpark.ui.ManageCars;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class GalleryViewModel extends ViewModel {
+public class ManageCarsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public GalleryViewModel() {
+    public ManageCarsViewModel() {
         mText = new MutableLiveData<>();
 
     }

@@ -1,18 +1,25 @@
 package com.example.watechpark;
 
-public class TestUser {
-    public String fullName, phone, email, username, password;
+public class TestUsers {
 
-    public TestUser(){
+    private String fullName;
+    private String phone;
+    private String email;
+    private String username;
+    private String password;
+    private String timestamp;
+
+    public TestUsers(){
 
     }
 
-    public TestUser(String fullName, String phone, String email, String username, String password) {
+    public TestUsers(String fullName, String phone, String email, String username, String password, String timestamp) {
         this.fullName = fullName;
         this.phone = phone;
         this.email = email;
         this.username = username;
         this.password = password;
+        this.timestamp = timestamp;
     }
 
     public String getFullName() {
@@ -53,5 +60,13 @@ public class TestUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 }
