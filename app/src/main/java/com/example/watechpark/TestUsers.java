@@ -6,19 +6,17 @@ public class TestUsers {
     private String phone;
     private String email;
     private String username;
-    private String password;
     private String timestamp;
 
     public TestUsers(){
 
     }
 
-    public TestUsers(String fullName, String phone, String email, String username, String password, String timestamp) {
+    public TestUsers(String fullName, String phone, String email, String username, String timestamp) {
         this.fullName = fullName;
         this.phone = phone;
         this.email = email;
         this.username = username;
-        this.password = password;
         this.timestamp = timestamp;
     }
 
@@ -54,13 +52,6 @@ public class TestUsers {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getTimestamp() {
         return timestamp;

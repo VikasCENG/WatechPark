@@ -140,7 +140,7 @@ public class MainMenu extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mAuth.signOut();
-                finish();
+                startActivity(new Intent(MainMenu.this, LoginRegister.class));
                 dialog.dismiss();
             }
         });
