@@ -232,11 +232,16 @@
         app:layout_constraintHorizontal_bias="0.563"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="106dp"
-        android:layout_height="87dp"
-        app:srcCompat="@drawable/user_transparent"
-        tools:layout_editor_absoluteX="249dp"
-        tools:layout_editor_absoluteY="37dp" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginEnd="96dp"
+        android:src="@drawable/user_transparent"
+        app:civ_border_color="#FFFFFF"
+        app:civ_border_width="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView27" />
 </androidx.constraintlayout.widget.ConstraintLayout>

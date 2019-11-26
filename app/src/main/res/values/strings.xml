@@ -81,5 +81,7 @@
     <string name="verify_pswd">Verify Your Password</string>
     <string name="phone_num1">Phone #:</string>
 
+    <string name="default_web_client_id">474740183087-o6p5dvq442iodplkmire8ffg5fo4srhe.apps.googleusercontent.com</string>
+
 
 </resources>

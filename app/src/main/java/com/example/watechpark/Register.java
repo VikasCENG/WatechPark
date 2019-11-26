@@ -35,11 +35,13 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.IOException;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Register extends AppCompatActivity {
     private EditText editFullName, editPhone, editEmail,editUserName, editPassword;
     private TextView textCreateAccount, textReg, textFullName, textPhone, textEmail, textUserName, textPassword, textPolicy;
     private Button signUp;
-    private ImageView profilePic;
+    private CircleImageView profilePic;
     private Toolbar toolBar;
     private CheckBox box;
 
@@ -146,9 +148,7 @@ public class Register extends AppCompatActivity {
             editUserName.requestFocus();
         } else if (password.isEmpty()) {
             editPassword.setError(getString(R.string.psw_req));
-        } else if(image != null){
-            Toast.makeText(getApplicationContext(), "You are missing a profile image!", Toast.LENGTH_SHORT).show();
-            {
+        } else {
 
                 progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -190,7 +190,7 @@ public class Register extends AppCompatActivity {
                 });
             }
         }
-    }
+
 
     private void startLoginActivity(){
         finish();
@@ -217,7 +217,7 @@ public class Register extends AppCompatActivity {
       toolBar = (Toolbar)findViewById(R.id.toolbar2);
       progressBar = findViewById(R.id.progressBar2);
 
-      profilePic = (ImageView)findViewById(R.id.imageView8);
+      profilePic = (CircleImageView)findViewById(R.id.profile_image);
     }
 
 }

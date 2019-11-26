@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ChangeYourPassword"></activity>
+        <activity android:name=".ChangeYourPassword" />
         <activity android:name=".CustomizeProfile" />
         <activity android:name=".AccountManagement" />
         <activity android:name=".VerifyYourPassword" />

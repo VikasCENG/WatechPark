@@ -41,6 +41,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AccountManagement extends AppCompatActivity {
 
 
@@ -52,13 +54,15 @@ public class AccountManagement extends AppCompatActivity {
     private TextView password;
     private TextView timestamp;
 
-    private ImageView profilePic;
+    private CircleImageView profilePic;
 
     protected Button customButton, changePass;
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
+    private FirebaseUser user;
+
     private String userID;
     private Toolbar toolbar;
     private FirebaseStorage firebaseStorage;
@@ -76,11 +80,12 @@ public class AccountManagement extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
     mAuth = FirebaseAuth.getInstance();
+    user = mAuth.getCurrentUser();
     firebaseDatabase = FirebaseDatabase.getInstance();
 
     firebaseStorage = FirebaseStorage.getInstance();
     StorageReference storageReference = firebaseStorage.getReference();
-    storageReference.child(mAuth.getUid()).child("Image/Profile Image").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+    storageReference.child(user.getUid()).child("Image/Profile Image").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
         @Override
         public void onSuccess(Uri uri) {
             Picasso.get().load(uri).fit().centerCrop().into(profilePic);
@@ -88,7 +93,7 @@ public class AccountManagement extends AppCompatActivity {
     });
 
     databaseReference = firebaseDatabase.getReference();
-    FirebaseUser user = mAuth.getCurrentUser();
+    //FirebaseUser user = mAuth.getCurrentUser();
     userID = user.getUid();
 
 
@@ -140,7 +145,7 @@ public class AccountManagement extends AppCompatActivity {
         timestamp = findViewById(R.id.textTime);
         toolbar = findViewById(R.id.toolbar5);
         customButton = findViewById(R.id.button7);
-        profilePic = findViewById(R.id.imageView4);
+        profilePic = (CircleImageView)findViewById(R.id.imageView4);
     }
 
 

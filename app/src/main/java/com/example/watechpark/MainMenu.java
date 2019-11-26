@@ -2,8 +2,14 @@ package com.example.watechpark;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,11 +29,16 @@ import androidx.navigation.ui.NavigationUI;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
 import android.widget.Button;
@@ -35,22 +46,48 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainMenu extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
 
+    RecyclerView recyclerView;
+    ParkingLocationAdapter adapter;
+    List<ParkingLocation> parkingList;
+
     private ImageView i1,i2,i3;
     private Button b1,b2,b3;
-    private TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,t10, t11, consumerID;
+    private TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,t10, t11, userName, userEmail;
 
-    private FirebaseAuth mAuth;
-    private FirebaseUser user;
+     FirebaseAuth mAuth;
+     FirebaseUser user;
+
+    private FirebaseStorage firebaseStorage;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+
+        parkingList = new ArrayList<>();
+
+        recyclerView = findViewById(R.id.recyclerView2);
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        parkingList.add(new ParkingLocation("Queens Parkway", "Queens, Toronto", 1.6, 6.50 , R.drawable.queens));
+        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
+
+
+
+        adapter = new ParkingLocationAdapter(this, parkingList);
+        recyclerView.setAdapter(adapter);
 
         i1 = (ImageView)findViewById(R.id.imageView9);
         i2 = (ImageView)findViewById(R.id.imageView11);
@@ -71,23 +108,24 @@ public class MainMenu extends AppCompatActivity {
         t9 = (TextView)findViewById(R.id.textView13);
         t10 = (TextView)findViewById(R.id.textView14);
         t11 = (TextView)findViewById(R.id.textView15);
-        consumerID = (TextView)findViewById(R.id.textViewID);
+       // userName = findViewById(R.id.nav_user);
+       // userEmail = findViewById(R.id.nav_email);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
         mAuth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        user = mAuth.getCurrentUser();
+
+        firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
 
 
-
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
-
 
 
 
@@ -101,6 +139,8 @@ public class MainMenu extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        displayHeaderInfo();
     }
 
     @Override
@@ -157,5 +197,35 @@ public class MainMenu extends AppCompatActivity {
     }
 
 
+    private void displayHeaderInfo() {
 
-}
+            NavigationView navigationView = findViewById(R.id.nav_view);
+            View headerView = navigationView.getHeaderView(0);
+            final TextView userName = headerView.findViewById(R.id.nav_user);
+            final TextView userEmail = headerView.findViewById(R.id.nav_email);
+            final CircleImageView navImage = headerView.findViewById(R.id.imageHeader);
+
+            //userName.setText(user.getDisplayName());
+            //userEmail.setText((user.getEmail()));
+
+            //Picasso.get().load(user.getPhotoUrl()).fit().centerCrop().into(navImage);
+            //Glide.with(this).load(user.getPhotoUrl()).apply(RequestOptions.circleCropTransform()).into(navImage);
+
+            firebaseStorage = FirebaseStorage.getInstance();
+            StorageReference storageReference = firebaseStorage.getReference();
+            storageReference.child(user.getUid()).child("Image/Profile Image").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Picasso.get().load(uri).fit().centerCrop().into(navImage);
+
+                    userEmail.setText(user.getEmail());
+                    userName.setText(user.getUid());
+                }
+            });
+
+            //Glide.with(this).applyDefaultRequestOptions(RequestOptions.circleCropTransform()).asBitmap().load(user.getPhotoUrl()).into(navImage);
+        }
+    }
+
+
+

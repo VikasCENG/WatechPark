@@ -1,19 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F4F4F4">
+
 
     <TextView
-        android:id="@+id/text_slideshow"
-        android:layout_width="match_parent"
+        android:id="@+id/textView35"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:fontFamily="@font/quicksand"
+        android:text="Color:"
+        android:textColor="#424242"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="235dp" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand"
+        android:text="Model:"
+        android:textColor="#424242"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="168dp" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand"
+        android:text="Make:"
+        android:textColor="#424242"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="88dp" />
+
+    <EditText
+        android:id="@+id/editText13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#424242"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="Enter Color"
+        android:inputType="textPersonName"
+        android:textColor="#424242"
+        android:textColorHint="#424242"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="259dp" />
+
+    <EditText
+        android:id="@+id/editText12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#424242"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="Enter Color"
+        android:inputType="textPersonName"
+        android:textColor="#424242"
+        android:textColorHint="#424242"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="331dp" />
+
+    <EditText
+        android:id="@+id/editText10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#424242"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="Enter Make"
+        android:inputType="textPersonName"
+        android:textColor="#424242"
+        android:textColorHint="#424242"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="113dp" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar6"
+        android:layout_width="418dp"
+        android:layout_height="60dp"
+        android:background="#AED581"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="-3dp" />
+
+    <EditText
+        android:id="@+id/editText11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#424242"
+        android:ems="10"
+        android:fontFamily="@font/quicksand"
+        android:hint="Enter Model"
+        android:inputType="textPersonName"
+        android:textColor="#424242"
+        android:textColorHint="#424242"
+        android:textSize="16sp"
+        tools:layout_editor_absoluteX="39dp"
+        tools:layout_editor_absoluteY="191dp" />
+
+    <Button
+        android:id="@+id/button9"
+        android:layout_width="222dp"
+        android:layout_height="51dp"
+        android:fontFamily="@font/quicksand"
+        android:text="Add Car"
+        android:textAllCaps="false"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="29dp"
+        tools:layout_editor_absoluteY="397dp" />
+
+    <TextView
+        android:id="@+id/textView32"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/quicksand"
+        android:text="License Plate #:"
+        android:textColor="#424242"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="38dp"
+        tools:layout_editor_absoluteY="307dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
