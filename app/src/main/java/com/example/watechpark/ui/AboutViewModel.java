@@ -1,14 +1,16 @@
-package com.example.watechpark.ui.OrderHistory;
+package com.example.watechpark.ui;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class OrderHistoryViewModel extends ViewModel {
+public class AboutViewModel extends ViewModel {
+    // TODO: Implement the ViewModel
+
 
     private MutableLiveData<String> mText;
 
-    public OrderHistoryViewModel() {
+    public AboutViewModel() {
         mText = new MutableLiveData<>();
 
     }
@@ -17,3 +19,6 @@ public class OrderHistoryViewModel extends ViewModel {
         return mText;
     }
 }
+
+
+

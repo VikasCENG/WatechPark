@@ -1,4 +1,5 @@
-package com.example.watechpark.ui.AddACar;
+package com.example.watechpark.ui;
+
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,21 +15,22 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.watechpark.R;
 
-public class AddACarFragment extends Fragment {
+public class OrderHistoryFragment extends Fragment {
 
-    private AddACarViewModel slideshowViewModel;
+    private OrderHistoryViewModel orderHistoryViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        slideshowViewModel =
-                ViewModelProviders.of(this).get(AddACarViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_addacar, container, false);
-        final TextView textView = root.findViewById(R.id.text_slideshow);
-        slideshowViewModel.getText().observe(this, new Observer<String>() {
+        orderHistoryViewModel =
+                ViewModelProviders.of(this).get(OrderHistoryViewModel.class);
+        View root = inflater.inflate(R.layout.order_history_fragment, container, false);
+        final TextView textView = root.findViewById(R.id.text_order);
+        orderHistoryViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
+
         });
         return root;
     }

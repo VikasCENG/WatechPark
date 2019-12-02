@@ -1,14 +1,14 @@
-package com.example.watechpark.ui.AddACar;
+package com.example.watechpark.ui.Home;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class AddACarViewModel extends ViewModel {
+public class HomeViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public AddACarViewModel() {
+    public HomeViewModel() {
         mText = new MutableLiveData<>();
 
     }

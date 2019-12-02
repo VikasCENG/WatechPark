@@ -16,6 +16,10 @@ public class ParkingLocation  {
         this.lotImage = lotImage;
     }
 
+    public ParkingLocation() {
+
+    }
+
     public String getLotName() {
         return lotName;
     }

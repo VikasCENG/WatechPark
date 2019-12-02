@@ -6,6 +6,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MenuItem;
 import android.view.View;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -123,9 +125,16 @@ public class Register extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public String getExtension(Uri image){
+        ContentResolver contentResolver = getContentResolver();
+        MimeTypeMap mimeTypeMap = MimeTypeMap.getSingleton();
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(image));
+    }
+
 
 
     private void registerValidate() {
+        final String imageID = System.currentTimeMillis()+"."+getExtension(image);
         final String fullName = editFullName.getText().toString().trim();
         final String phone = editPhone.getText().toString().trim();
         final String email = editEmail.getText().toString().trim();
@@ -134,7 +143,7 @@ public class Register extends AppCompatActivity {
         final Long time = System.currentTimeMillis()/1000;
         final String timestamp = time.toString();
 
-        if (fullName.isEmpty()) {
+        if(fullName.isEmpty()) {
             editFullName.setError(getString(R.string.full_req));
             editFullName.requestFocus();
         } else if (phone.isEmpty()) {
@@ -170,17 +179,18 @@ public class Register extends AppCompatActivity {
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                                     Toast.makeText(getApplicationContext(), "Profile image is uploaded!", Toast.LENGTH_SHORT).show();
+                                    startLoginActivity();
                                 }
                             });
 
 
-                            TestUsers user = new TestUsers(fullName, phone, email, username, timestamp);
+                            TestUsers user = new TestUsers(imageID,fullName, phone, email, username, timestamp);
 
                             FirebaseDatabase.getInstance().getReference("TestUsers").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user);
 
 
-                            startLoginActivity();
+
 
                         } else {
                             Toast.makeText(getApplicationContext(), getString(R.string.failed_reg), Toast.LENGTH_LONG).show();
@@ -193,7 +203,8 @@ public class Register extends AppCompatActivity {
 
 
     private void startLoginActivity(){
-        finish();
+
+       finish();
     }
 
     private void findAllViews(){
@@ -219,5 +230,7 @@ public class Register extends AppCompatActivity {
 
       profilePic = (CircleImageView)findViewById(R.id.profile_image);
     }
+
+
 
 }

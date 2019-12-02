@@ -1,4 +1,4 @@
-package com.example.watechpark.ui.ParkingPasses;
+package com.example.watechpark.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,22 +14,22 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.watechpark.R;
 
-public class ParkingPassesFragment extends Fragment {
+public class AboutFragment extends Fragment {
 
-    private ParkingPassesViewModel homeViewModel;
+    private AboutViewModel aboutViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
-        homeViewModel =
-                ViewModelProviders.of(this).get(ParkingPassesViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_parkingpasses, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        aboutViewModel =
+                ViewModelProviders.of(this).get(AboutViewModel.class);
+        View root = inflater.inflate(R.layout.about_fragment, container, false);
+        final TextView textView = root.findViewById(R.id.text_about);
+        aboutViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
+
         });
         return root;
     }

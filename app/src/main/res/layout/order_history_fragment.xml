@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#424242"
-    tools:context=".ui.Help.HelpFragment">
+    tools:context=".ui.OrderHistoryFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Hello"
-        android:id="@+id/text_help"/>
+        android:id="@+id/text_order"/>
 
 </FrameLayout>

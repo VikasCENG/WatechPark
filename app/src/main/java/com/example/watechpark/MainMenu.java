@@ -7,6 +7,9 @@ import android.os.Bundle;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.watechpark.ui.AddACarFragment;
+import com.example.watechpark.ui.Home.HomeFragment;
+import com.example.watechpark.ui.Settings.PaymentFragment;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,6 +24,9 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.SearchView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -41,10 +47,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +77,7 @@ public class MainMenu extends AppCompatActivity {
 
     private FirebaseStorage firebaseStorage;
 
+    protected Button addACar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,18 +86,30 @@ public class MainMenu extends AppCompatActivity {
 
         parkingList = new ArrayList<>();
 
+
         recyclerView = findViewById(R.id.recyclerView2);
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         parkingList.add(new ParkingLocation("Queens Parkway", "Queens, Toronto", 1.6, 6.50 , R.drawable.queens));
+        parkingList.add(new ParkingLocation("Queens Parkway", "Queens, Toronto", 1.6, 6.50 , R.drawable.queens));
         parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
-
+        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
+        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
+        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
+        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
+        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
+        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
+        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
 
 
         adapter = new ParkingLocationAdapter(this, parkingList);
         recyclerView.setAdapter(adapter);
+
+
+
+
 
         i1 = (ImageView)findViewById(R.id.imageView9);
         i2 = (ImageView)findViewById(R.id.imageView11);
@@ -121,27 +143,32 @@ public class MainMenu extends AppCompatActivity {
         StorageReference storageReference = firebaseStorage.getReference();
 
 
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setTitle("Home");
 
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNav);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
 
 
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
-                R.id.nav_tools, R.id.nav_share, R.id.nav_send)
+                R.id.nav_home, R.id.nav_passes, R.id.nav_orderhistory, R.id.nav_addacar, R.id.nav_manage,
+                R.id.nav_payment, R.id.nav_settings, R.id.nav_help, R.id.nav_about)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
+
+
+
         displayHeaderInfo();
     }
+
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -164,6 +191,8 @@ public class MainMenu extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return true;
     }
+
+
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -197,6 +226,9 @@ public class MainMenu extends AppCompatActivity {
     }
 
 
+
+
+
     private void displayHeaderInfo() {
 
             NavigationView navigationView = findViewById(R.id.nav_view);
@@ -225,7 +257,9 @@ public class MainMenu extends AppCompatActivity {
 
             //Glide.with(this).applyDefaultRequestOptions(RequestOptions.circleCropTransform()).asBitmap().load(user.getPhotoUrl()).into(navImage);
         }
-    }
+
+
+}
 
 
 

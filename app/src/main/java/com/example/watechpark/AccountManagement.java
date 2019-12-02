@@ -46,10 +46,9 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class AccountManagement extends AppCompatActivity {
 
 
-
     private TextView fullName;
     private TextView phoneNumber;
-    private TextView email;
+    private TextView emailAddress;
     private TextView userName;
     private TextView password;
     private TextView timestamp;
@@ -58,12 +57,11 @@ public class AccountManagement extends AppCompatActivity {
 
     protected Button customButton, changePass;
 
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+     FirebaseDatabase firebaseDatabase;
+     DatabaseReference databaseReference;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
-    private String userID;
     private Toolbar toolbar;
     private FirebaseStorage firebaseStorage;
 
@@ -79,54 +77,53 @@ public class AccountManagement extends AppCompatActivity {
 
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-    mAuth = FirebaseAuth.getInstance();
-    user = mAuth.getCurrentUser();
-    firebaseDatabase = FirebaseDatabase.getInstance();
 
-    firebaseStorage = FirebaseStorage.getInstance();
-    StorageReference storageReference = firebaseStorage.getReference();
-    storageReference.child(user.getUid()).child("Image/Profile Image").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-        @Override
-        public void onSuccess(Uri uri) {
-            Picasso.get().load(uri).fit().centerCrop().into(profilePic);
-        }
-    });
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
 
-    databaseReference = firebaseDatabase.getReference();
-    //FirebaseUser user = mAuth.getCurrentUser();
-    userID = user.getUid();
+        String userID = user.getUid();
 
+        firebaseStorage = FirebaseStorage.getInstance();
+        StorageReference storageReference = firebaseStorage.getReference();
+        storageReference.child(userID).child("Image/Profile Image").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).fit().centerCrop().into(profilePic);
+            }
+        });
 
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("TestUsers");
+
+        readData();
+
+    }
+
+    public void readData(){
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    showData(dataSnapshot);
+                String name = dataSnapshot.child(user.getUid()).getValue(TestUsers.class).getFullName();
+                String phone = dataSnapshot.child(user.getUid()).getValue(TestUsers.class).getPhone();
+                String email = dataSnapshot.child(user.getUid()).getValue(TestUsers.class).getEmail();
+                String userName1 = dataSnapshot.child(user.getUid()).getValue(TestUsers.class).getUsername();
+                String time = dataSnapshot.child(user.getUid()).getValue(TestUsers.class).getTimestamp();
+                fullName.setText(name);
+                phoneNumber.setText("Phone #: " + phone);
+                emailAddress.setText("E-mail: " + email);
+                userName.setText("Username: " + userName1);
+                timestamp.setText(convertTimestamp(time));
+            }
 
-        }
-
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
-            Toast.makeText(getApplicationContext(), " Data can not be read at this time...", Toast.LENGTH_SHORT).show();
-        }
-    });
-
-}
-
-    private void showData(DataSnapshot dataSnapshot) {
-
-        for(DataSnapshot ds: dataSnapshot.getChildren()){
-            TestUsers user = new TestUsers();
-            fullName.setText(ds.child(userID).getValue(TestUsers.class).getFullName());
-            phoneNumber.setText(getString(R.string.phone_num1) + ds.child(userID).getValue(TestUsers.class).getPhone());
-            email.setText("E-mail: " + ds.child(userID).getValue(TestUsers.class).getEmail());
-            userName.setText("Username: " + ds.child(userID).getValue(TestUsers.class).getUsername());
-            timestamp.setText(convertTimestamp(ds.child(userID).getValue(TestUsers.class).getTimestamp()));
-
-        }
-
-
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(getApplicationContext(), " Profile data is unavailable at this time...", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
+
 
     private String convertTimestamp(String timestamp){
         long yourSeconds = Long.valueOf(timestamp);
@@ -139,7 +136,7 @@ public class AccountManagement extends AppCompatActivity {
     private void findAllViews(){
         fullName = findViewById(R.id.textFullName);
         phoneNumber = findViewById(R.id.textPhone);
-        email = findViewById(R.id.textEmail);
+        emailAddress = findViewById(R.id.textEmail);
         userName = findViewById(R.id.textUserName);
         password = findViewById(R.id.textPassword);
         timestamp = findViewById(R.id.textTime);

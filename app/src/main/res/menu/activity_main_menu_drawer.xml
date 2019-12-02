@@ -7,18 +7,25 @@
 
         <item
             android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="Home" />
+
+        <item
+            android:id="@+id/nav_passes"
             android:icon="@drawable/ic_local_parking_black_24dp"
             android:title="Parking Passes" />
+
+
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_orderhistory"
             android:icon="@drawable/ic_history_black_24dp"
             android:title="Order History" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_addacar"
             android:icon="@drawable/ic_directions_car_black_24dp"
             android:title="Add A Car" />
         <item
-            android:id="@+id/nav_tools"
+            android:id="@+id/nav_manage"
             android:icon="@drawable/ic_build_black_24dp"
             android:title="Manage Cars" />
         <item
@@ -30,16 +37,15 @@
     <item android:title="View">
         <menu>
             <item
-                android:id="@+id/nav_share"
+                android:id="@+id/nav_settings"
                 android:icon="@drawable/ic_settings_applications_black_24dp"
                 android:title="Settings" />
             <item
-                android:id="@+id/nav_send"
+                android:id="@+id/nav_help"
                 android:icon="@drawable/ic_help_black_24dp"
                 android:title="Help" />
 
             <item
-
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_view_compact_black_24dp"
                 android:title="About" />

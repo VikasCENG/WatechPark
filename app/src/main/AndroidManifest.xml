@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".LotDetailActivity"></activity>
         <activity android:name=".ChangeYourPassword" />
         <activity android:name=".CustomizeProfile" />
         <activity android:name=".AccountManagement" />
@@ -24,7 +25,8 @@
         <activity
             android:name=".MainMenu"
             android:label="@string/title_activity_main_menu"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing"/>
         <activity android:name=".LoginRegister" />
         <activity android:name=".SplashScreen">
             <intent-filter>
