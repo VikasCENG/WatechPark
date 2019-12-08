@@ -7,8 +7,10 @@
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECIEVE" />
 
     <application
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -17,8 +19,6 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".LotDetailActivity"></activity>
-        <activity android:name=".ChangeYourPassword" />
-        <activity android:name=".CustomizeProfile" />
         <activity android:name=".AccountManagement" />
         <activity android:name=".VerifyYourPassword" />
         <activity android:name=".Register" />
@@ -40,6 +40,8 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
     </application>
 
 </manifest>

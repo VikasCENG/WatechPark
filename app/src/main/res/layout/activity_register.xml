@@ -124,7 +124,7 @@
         android:layout_marginBottom="32dp"
         android:background="#AED581"
         android:fontFamily="@font/quicksand"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"

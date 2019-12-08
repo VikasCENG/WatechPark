@@ -6,7 +6,7 @@
         android:id="@+id/action_acc"
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:orderInCategory="100"
-        android:title="Account Management"
+        android:title="@string/item_acct"
         app:itemIconTint="#F4F4F4"
         app:showAsAction="always" />
 
@@ -14,7 +14,7 @@
         android:id="@+id/action_logout"
         android:icon="@drawable/ic_arrow_forward_black_24dp"
         android:orderInCategory="100"
-        android:title="Log-Out"
+        android:title="@string/item_logout"
         app:itemIconTint="#F4F4F4"
         app:showAsAction="always" />
 

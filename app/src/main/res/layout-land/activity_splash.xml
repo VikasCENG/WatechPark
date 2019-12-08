@@ -11,44 +11,42 @@
 
     <ImageView
         android:id="@+id/imageLogo"
-        android:layout_width="279dp"
-        android:layout_height="226dp"
+        android:layout_width="382dp"
+        android:layout_height="412dp"
         app:layout_constraintBottom_toTopOf="@+id/textStatus"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.551"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/logo_transparent" />
 
     <TextView
         android:id="@+id/textStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
+        android:layout_marginBottom="20dp"
         android:fontFamily="@font/quicksand"
         android:text="@string/preparing_your_parking_lot"
         android:textAllCaps="false"
         android:textColor="#424242"
         android:textSize="14sp"
         android:textStyle="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.967"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="52dp"
         android:fontFamily="@font/quicksand"
         android:text="@string/park_smart"
         android:textAllCaps="false"
         android:textColor="#90CAF9"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/imageLogo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
@@ -56,13 +54,14 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
         android:backgroundTint="#90caf9"
         android:indeterminateTint="#90caf9"
         android:progressBackgroundTint="@color/colorAccent"
         android:progressTint="#90caf9"
         app:layout_constraintBottom_toTopOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView

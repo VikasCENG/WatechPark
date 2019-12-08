@@ -44,11 +44,12 @@
 
     <ImageView
         android:id="@+id/image2"
-        android:layout_width="187dp"
-        android:layout_height="217dp"
-        android:layout_marginTop="52dp"
+        android:layout_width="255dp"
+        android:layout_height="257dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/textUser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.967"
+        app:layout_constraintHorizontal_bias="0.567"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo_transparent" />
@@ -57,21 +58,19 @@
         android:id="@+id/textUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
         android:fontFamily="@font/quicksand"
-        android:text="@string/e_mail_username"
+        android:text="@string/log_email"
         android:textColor="#424242"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/textPass"
+        app:layout_constraintBottom_toTopOf="@+id/editUser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintHorizontal_bias="0.337"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editUser"
         android:layout_width="221dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="40dp"
         android:backgroundTint="#424242"
         android:ems="10"
         android:fontFamily="@font/quicksand"
@@ -81,7 +80,6 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -96,27 +94,25 @@
         android:textColor="#424242"
         app:layout_constraintBottom_toTopOf="@+id/checkBox"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="284dp"
         android:fontFamily="@font/quicksand"
         android:text="@string/password"
         android:textColor="#424242"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/editPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.051"
+        app:layout_constraintHorizontal_bias="0.278"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="232dp"
+        android:layout_marginStart="56dp"
         android:backgroundTint="@color/colorAccent"
         android:buttonTint="#90caf9"
         android:fontFamily="@font/quicksand"

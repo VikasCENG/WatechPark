@@ -58,11 +58,11 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
     public void onBindViewHolder(@NonNull ManageCarsAdapter.ManageCarsViewHolder holder, final int position) {
 
         final Cars car = cars.get(position);
-        holder.make.setText("Make: " + car.getMake());
-        holder.model.setText("Model: " + car.getModel());
-        holder.color.setText("Color: " +car.getColor());
+        holder.make.setText(context.getString(R.string.make_set) + car.getMake());
+        holder.model.setText(context.getString(R.string.mo) + car.getModel());
+        holder.color.setText(context.getString(R.string.getcol) +car.getColor());
         holder.licensePlate.setText(car.getLplate());
-        holder.timeAdded.setText("Time Added: " + (convertTimestamp(car.getTimestamp())));
+        holder.timeAdded.setText(context.getString(R.string.getime) + (convertTimestamp(car.getTimestamp())));
 
         holder.edit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,9 +79,9 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Delete Car From Inventory");
-                builder.setMessage("Are you sure you want to delete this car?");
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                builder.setTitle(context.getString(R.string.del_carr));
+                builder.setMessage(context.getString(R.string.areyousure));
+                builder.setPositiveButton(context.getString(R.string.yees), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         mAuth2 = FirebaseAuth.getInstance();
@@ -89,11 +89,11 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
                         databaseReference = FirebaseDatabase.getInstance().getReference().child("Cars").child(user2.getUid());
                         databaseReference.removeValue();
                         dialog.dismiss();
-                        Toast.makeText(context, "Car is deleted from inventory...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, R.string.cadeleted, Toast.LENGTH_SHORT).show();
                     }
                 });
 
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(context.getString(R.string.no_op), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
@@ -162,7 +162,7 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
                 editTime.setText(convertTimestamp(newTime));
 
                 if(TextUtils.isEmpty(newMake)){
-                    Toast.makeText(context,"Missing make", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.missing_make, Toast.LENGTH_SHORT).show();
                 }else{
                     updateChanges(newMake,newModel,newColor,newNum,newTime);
                 }
@@ -174,7 +174,7 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
 
 
 
-        dialog.setTitle("Edit Car");
+        dialog.setTitle(context.getString(R.string.edit_car));
 
         AlertDialog alertDialog = dialog.create();
         alertDialog.show();
@@ -184,19 +184,19 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
     private String convertTimestamp(String timestamp){
         long yourSeconds = Long.valueOf(timestamp);
         Date mDate = new Date(yourSeconds * 1000);
-        DateFormat df = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a ");
+        DateFormat df = new SimpleDateFormat(context.getString(R.string.date_for));
         return df.format(mDate);
 
     }
 
     private void updateChanges(String make, String model, String color, String number, String time){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("Cars").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(context.getString(R.string.cars_data)).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         Cars cars2 = new Cars(make,model,color,number,time);
 
         databaseReference.setValue(cars2);
 
-        Toast.makeText(context, "Car is updated", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, R.string.car_updated, Toast.LENGTH_SHORT).show();
 
 
     }
@@ -204,6 +204,7 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
 
 
     }
+
 
 
 

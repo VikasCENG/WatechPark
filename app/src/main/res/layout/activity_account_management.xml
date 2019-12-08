@@ -8,64 +8,32 @@
     tools:context=".AccountManagement">
 
 
-    <Button
-        android:id="@+id/button8"
-        android:layout_width="213dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="24dp"
-        android:background="#90caf9"
-        android:fontFamily="@font/quicksand"
-        android:text="Change Your Password"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textTime"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/textTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="284dp"
         android:fontFamily="@font/quicksand"
-        android:text="Timestamp: "
+        android:text="@string/timestamp"
         android:textColor="#f4f4f4"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
-        android:background="#aed581"
-        android:fontFamily="@font/quicksand"
-        android:text="Password: "
-        android:textColor="#f4f4f4"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textPhone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.646"
+        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="28dp"
         android:fontFamily="@font/quicksand"
-        android:text="E-mail: "
+        android:text="@string/email1"
         android:textColor="#f4f4f4"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintBottom_toTopOf="@+id/textTime"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.141"
         app:layout_constraintStart_toStartOf="parent" />
@@ -77,7 +45,7 @@
         android:layout_marginEnd="68dp"
         android:layout_marginBottom="504dp"
         android:fontFamily="@font/quicksand"
-        android:text="Full Name: "
+        android:text="@string/fulln"
         android:textColor="#f4f4f4"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -92,7 +60,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/quicksand"
-        android:text="Phone #: "
+        android:text="@string/phoner"
         android:textColor="#f4f4f4"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -105,17 +73,16 @@
         android:id="@+id/textUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
         android:background="#aed581"
         android:fontFamily="@font/quicksand"
-        android:text="Username: "
+        android:text="@string/userr"
         android:textColor="#f4f4f4"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.654"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="165dp" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar5"
@@ -144,27 +111,12 @@
         app:layout_constraintHorizontal_bias="0.285"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/button7"
-        android:layout_width="213dp"
-        android:layout_height="57dp"
-        android:layout_marginBottom="16dp"
-        android:background="#aed581"
-        android:fontFamily="@font/quicksand"
-        android:text="Customize Profile"
-        android:textAllCaps="false"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/button8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <TextView
         android:id="@+id/textView38"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/quicksand"
-        android:text="Manage Your Account"
+        android:text="@string/titler"
         android:textAlignment="textStart"
         android:textColor="#f4f4f4"
         android:textSize="18sp"

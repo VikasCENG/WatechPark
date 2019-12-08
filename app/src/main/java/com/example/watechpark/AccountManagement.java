@@ -55,7 +55,6 @@ public class AccountManagement extends AppCompatActivity {
 
     private CircleImageView profilePic;
 
-    protected Button customButton, changePass;
 
      FirebaseDatabase firebaseDatabase;
      DatabaseReference databaseReference;
@@ -85,7 +84,7 @@ public class AccountManagement extends AppCompatActivity {
 
         firebaseStorage = FirebaseStorage.getInstance();
         StorageReference storageReference = firebaseStorage.getReference();
-        storageReference.child(userID).child("Image/Profile Image").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        storageReference.child(userID).child(getString(R.string.prof_img)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
             public void onSuccess(Uri uri) {
                 Picasso.get().load(uri).fit().centerCrop().into(profilePic);
@@ -93,7 +92,7 @@ public class AccountManagement extends AppCompatActivity {
         });
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference("TestUsers");
+        databaseReference = firebaseDatabase.getReference(getString(R.string.test_users));
 
         readData();
 
@@ -109,15 +108,15 @@ public class AccountManagement extends AppCompatActivity {
                 String userName1 = dataSnapshot.child(user.getUid()).getValue(TestUsers.class).getUsername();
                 String time = dataSnapshot.child(user.getUid()).getValue(TestUsers.class).getTimestamp();
                 fullName.setText(name);
-                phoneNumber.setText("Phone #: " + phone);
-                emailAddress.setText("E-mail: " + email);
-                userName.setText("Username: " + userName1);
+                phoneNumber.setText(getString(R.string.ph) + phone);
+                emailAddress.setText(getString(R.string.em) + email);
+                userName.setText(getString(R.string.us) + userName1);
                 timestamp.setText(convertTimestamp(time));
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), " Profile data is unavailable at this time...", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.prof_uun, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -128,7 +127,7 @@ public class AccountManagement extends AppCompatActivity {
     private String convertTimestamp(String timestamp){
         long yourSeconds = Long.valueOf(timestamp);
         Date mDate = new Date(yourSeconds * 1000);
-        DateFormat df = new SimpleDateFormat("dd MMM yyyy hh:mm:ss a ");
+        DateFormat df = new SimpleDateFormat(getString(R.string.format));
         return df.format(mDate);
 
     }
@@ -138,10 +137,8 @@ public class AccountManagement extends AppCompatActivity {
         phoneNumber = findViewById(R.id.textPhone);
         emailAddress = findViewById(R.id.textEmail);
         userName = findViewById(R.id.textUserName);
-        password = findViewById(R.id.textPassword);
         timestamp = findViewById(R.id.textTime);
         toolbar = findViewById(R.id.toolbar5);
-        customButton = findViewById(R.id.button7);
         profilePic = (CircleImageView)findViewById(R.id.imageView4);
     }
 

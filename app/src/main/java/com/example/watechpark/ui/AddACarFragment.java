@@ -52,7 +52,7 @@ public class AddACarFragment extends Fragment {
         View root = inflater.inflate(R.layout.add_acar_fragment, container, false);
 
         mAuth = FirebaseAuth.getInstance();
-        user = FirebaseAuth.getInstance().getCurrentUser();
+        user = mAuth.getCurrentUser();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
@@ -86,16 +86,16 @@ public class AddACarFragment extends Fragment {
         final String timestamp = time.toString();
 
         if (make.isEmpty()) {
-            edit_make.setError("Make is required!");
+            edit_make.setError(getString(R.string.make));
             edit_make.requestFocus();
         } else if (model.isEmpty()) {
-            edit_model.setError("Model is required!");
+            edit_model.setError(getString(R.string.model));
             edit_model.requestFocus();
         } else if (color.isEmpty()) {
-            edit_color.setError("Add a Color!");
+            edit_color.setError(getString(R.string.color));
             edit_color.requestFocus();
         } else if (licensePlate.isEmpty()) {
-            edit_number.setError("License Plate # is required!");
+            edit_number.setError(getString(R.string.lic));
             edit_number.requestFocus();
         } else {
 
@@ -106,9 +106,9 @@ public class AddACarFragment extends Fragment {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(getContext(), "Car is added into your inventory...", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.car_added, Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(getContext(), "Failed to register car!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), R.string.car_failed, Toast.LENGTH_SHORT).show();
                     }
                 }
             });

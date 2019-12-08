@@ -10,7 +10,6 @@ public class PaymentViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
     public PaymentViewModel() {
-        mText = new MutableLiveData<>();
 
     }
 

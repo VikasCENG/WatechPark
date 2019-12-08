@@ -90,7 +90,7 @@ public class LoginRegister extends AppCompatActivity {
 
                 FirebaseUser mUser = mLoginAuth.getCurrentUser();
                 if (mUser != null) {
-                    Toast.makeText(LoginRegister.this, "Welcome back" + mUser.getEmail(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginRegister.this, getString(R.string.welcome_back) + mUser.getEmail(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), MainMenu.class);
                     startActivity(intent);
                 } else {
@@ -166,7 +166,7 @@ public class LoginRegister extends AppCompatActivity {
         FirebaseUser currentUser = mLoginAuth.getCurrentUser();
         if(currentUser != null){
             loadSharedPref();
-            Toast.makeText(getApplicationContext(), "Welcome back " + currentUser.getEmail() + "!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.welcome1) + currentUser.getEmail() + getString(R.string.ex), Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), MainMenu.class));
         }
     }
@@ -174,23 +174,23 @@ public class LoginRegister extends AppCompatActivity {
     private void saveSharedPref(){
         if(signedInStatus.isChecked()) {
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("email", edit.getText().toString());
-            editor.putString("password", edit1.getText().toString());
-            editor.putBoolean("checkbox", signedInStatus.isChecked());
+            editor.putString(getString(R.string.email_put), edit.getText().toString());
+            editor.putString(getString(R.string.pass_put), edit1.getText().toString());
+            editor.putBoolean(getString(R.string.box_put), signedInStatus.isChecked());
             editor.apply();
         }else{
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putString("email", "");
-            editor.putString("password", "");
-            editor.putBoolean("checkbox", false);
+            editor.putString(getString(R.string.email_put1), "");
+            editor.putString(getString(R.string.email_put2), "");
+            editor.putBoolean(getString(R.string.box_put2), false);
             editor.apply();
         }
     }
 
     private void loadSharedPref(){
-        Boolean checked = sharedPref.getBoolean("checkbox", false);
-        String userEmail = sharedPref.getString("email", "");
-        String userPassword = sharedPref.getString("password", "");
+        Boolean checked = sharedPref.getBoolean(getString(R.string.check_shared), false);
+        String userEmail = sharedPref.getString(getString(R.string.email_shared), "");
+        String userPassword = sharedPref.getString(getString(R.string.pass_shared), "");
 
         edit.setText(userEmail);
         edit1.setText(userPassword);
@@ -221,11 +221,11 @@ public class LoginRegister extends AppCompatActivity {
         try {
 
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Toast.makeText(getApplicationContext(), "Welcome! "  + account.getDisplayName() , Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.new_wel)  + account.getDisplayName() , Toast.LENGTH_SHORT).show();
             startActivity(new Intent(LoginRegister.this, MainMenu.class));
 
         } catch (ApiException e) {
-            Toast.makeText(LoginRegister.this, "Authentication Failed...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LoginRegister.this, R.string.auth_fail, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -252,7 +252,7 @@ public class LoginRegister extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     progressBar1.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
-                        Toast.makeText(getApplicationContext(), "Welcome! "  + email , Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.wel2)  + email , Toast.LENGTH_SHORT).show();
 
                         startActivity(new Intent(LoginRegister.this, MainMenu.class));
                     } else {

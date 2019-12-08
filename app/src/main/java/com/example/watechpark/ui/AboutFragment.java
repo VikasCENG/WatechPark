@@ -23,14 +23,7 @@ public class AboutFragment extends Fragment {
         aboutViewModel =
                 ViewModelProviders.of(this).get(AboutViewModel.class);
         View root = inflater.inflate(R.layout.about_fragment, container, false);
-        final TextView textView = root.findViewById(R.id.text_about);
-        aboutViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
 
-        });
         return root;
     }
 }

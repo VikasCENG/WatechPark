@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.watechpark"
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -43,6 +43,10 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.google.android.gms:play-services-awareness:17.1.0'
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    implementation 'com.google.firebase:firebase-messaging:20.0.1'
+    implementation 'androidx.preference:preference:1.1.0'
 
     implementation 'com.github.bumptech.glide:glide:4.10.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'

@@ -29,7 +29,7 @@
         android:layout_height="32dp"
         android:fontFamily="@font/quicksand"
         android:gravity="center"
-        android:text="E-mail"
+        android:text="@string/nav_em"
         android:textColor="#424242"
         android:textSize="14sp"
         android:textStyle="bold" />
@@ -40,9 +40,10 @@
         android:layout_height="29dp"
         android:fontFamily="@font/quicksand"
         android:gravity="center"
-        android:text="UID"
+        android:text="@string/nav_bal"
         android:textColor="#424242"
-        android:textSize="12sp" />
+        android:textSize="16sp"
+        android:textStyle="bold"/>
 
 
 </LinearLayout>

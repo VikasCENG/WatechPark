@@ -1,13 +1,10 @@
 package com.example.watechpark;
 
 public class Data {
-
-    private String status;
-    private int proximity;
+    private String proximity;
     private String timestamp;
 
-    public Data(String status, int proximity, String timestamp) {
-        this.status = status;
+    public Data(String proximity, String timestamp) {
         this.proximity = proximity;
         this.timestamp = timestamp;
     }
@@ -15,19 +12,11 @@ public class Data {
     public Data() {
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public int getProximity() {
+    public String getProximity() {
         return proximity;
     }
 
-    public void setProximity(int proximity) {
+    public void setProximity(String proximity) {
         this.proximity = proximity;
     }
 
@@ -39,4 +28,3 @@ public class Data {
         this.timestamp = timestamp;
     }
 }
-

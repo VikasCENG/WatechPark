@@ -63,7 +63,7 @@ public class VerifyYourPassword extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         Bundle extras = getIntent().getExtras();
-        veri_code = extras.getString("vericode");
+        veri_code = extras.getString(getString(R.string.vcode));
 
         verifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +73,7 @@ public class VerifyYourPassword extends AppCompatActivity {
                 final String pswd = newPass.getText().toString().trim();
 
                 if (code.isEmpty() || code.length() < 6) {
-                    verificationCode.setError("Enter the code...");
+                    verificationCode.setError(getString(R.string.entr_code));
                     verificationCode.requestFocus();
                     return;
                 }
@@ -109,13 +109,13 @@ public class VerifyYourPassword extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Toast.makeText(VerifyYourPassword.this, "Verified", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(VerifyYourPassword.this, R.string.veri, Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(VerifyYourPassword.this, LoginRegister.class);
                             startActivity(i);
 
                         } else {
 
-                            Toast.makeText(getApplicationContext(), "Verfication code is wrong, please try again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), R.string.veri_wrong, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -129,7 +129,7 @@ public class VerifyYourPassword extends AppCompatActivity {
                 PhoneAuthCredential credential = PhoneAuthProvider.getCredential(veri_code, code);
                 signInWithPhone(credential);
             } catch (Exception e) {
-                Toast.makeText(this, "Verification code is wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.veri_wrong2, Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -148,9 +148,9 @@ public class VerifyYourPassword extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(getApplicationContext(), "New password successfully updated", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), R.string.newpass, Toast.LENGTH_SHORT).show();
                             }else{
-                                Toast.makeText(getApplicationContext(), "Failed to update new password...", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), R.string.failedupdate, Toast.LENGTH_SHORT).show();
                             }
                         }
                     });

@@ -85,7 +85,7 @@ public class Register extends AppCompatActivity {
                 Intent i = new Intent();
                 i.setType("image/*");
                 i.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(i, "Select Profile Image"), SELECT_IMAGE);
+                startActivityForResult(Intent.createChooser(i, getString(R.string.sel_prof)), SELECT_IMAGE);
 
 
             }
@@ -171,22 +171,22 @@ public class Register extends AppCompatActivity {
                             uploadTask.addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), "Failed to upload the image...", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), R.string.fail_up, Toast.LENGTH_SHORT).show();
 
                                 }
                             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                    Toast.makeText(getApplicationContext(), "Profile image is uploaded!", Toast.LENGTH_SHORT).show();
-                                    startLoginActivity();
+                                    Toast.makeText(getApplicationContext(), R.string.prof_up, Toast.LENGTH_SHORT).show();
+                                    finish();
                                 }
                             });
 
 
                             TestUsers user = new TestUsers(imageID,fullName, phone, email, username, timestamp);
 
-                            FirebaseDatabase.getInstance().getReference("TestUsers").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            FirebaseDatabase.getInstance().getReference(getString(R.string.test_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user);
 
 
@@ -204,7 +204,7 @@ public class Register extends AppCompatActivity {
 
     private void startLoginActivity(){
 
-       finish();
+       startActivity(new Intent(getApplicationContext(), LoginRegister.class));
     }
 
     private void findAllViews(){

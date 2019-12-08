@@ -63,7 +63,7 @@ public class ForgotYourPassword extends AppCompatActivity {
                     final String phone = txt1.getText().toString();
 
                     if (phone.isEmpty()) {
-                        txt1.setError("Phone # required");
+                        txt1.setError(getString(R.string.phone_requ));
                         txt1.requestFocus();
                     }
 
@@ -81,7 +81,7 @@ public class ForgotYourPassword extends AppCompatActivity {
         mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
-                Toast.makeText(getApplicationContext(), "You are verified", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.var, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -93,9 +93,9 @@ public class ForgotYourPassword extends AppCompatActivity {
             public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                 super.onCodeSent(s, forceResendingToken);
                 verification_code = s;
-                Toast.makeText(getApplicationContext(), " Code is sent to the number", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.code_sent, Toast.LENGTH_SHORT).show();
                 Intent newIntent = new Intent(ForgotYourPassword.this, VerifyYourPassword.class);
-                newIntent.putExtra("vericode", verification_code);
+                newIntent.putExtra(getString(R.string.vericode1), verification_code);
                 startActivity(newIntent);
                 finish();
 
@@ -147,9 +147,9 @@ public class ForgotYourPassword extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(getApplicationContext(), " Verification email sent to " + email, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.veri_emailsent) + email, Toast.LENGTH_SHORT).show();
                         }else{
-                            Toast.makeText(ForgotYourPassword.this, "Error in sending email...", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(ForgotYourPassword.this, R.string.err, Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

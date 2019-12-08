@@ -68,6 +68,7 @@ public class MainMenu extends AppCompatActivity {
     ParkingLocationAdapter adapter;
     List<ParkingLocation> parkingList;
 
+
     private ImageView i1,i2,i3;
     private Button b1,b2,b3;
     private TextView t1,t2,t3,t4,t5,t6,t7,t8,t9,t10, t11, userName, userEmail;
@@ -86,50 +87,26 @@ public class MainMenu extends AppCompatActivity {
 
         parkingList = new ArrayList<>();
 
-
         recyclerView = findViewById(R.id.recyclerView2);
         recyclerView.setHasFixedSize(true);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        parkingList.add(new ParkingLocation("Queens Parkway", "Queens, Toronto", 1.6, 6.50 , R.drawable.queens));
-        parkingList.add(new ParkingLocation("Queens Parkway", "Queens, Toronto", 1.6, 6.50 , R.drawable.queens));
-        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
-        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
-        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
-        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
-        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
-        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
-        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
-        parkingList.add(new ParkingLocation("Humber College NC", "Etobicoke, Toronto", 3.6, 8.50 , R.drawable.humber2));
+        parkingList.add(new ParkingLocation(getString(R.string.queens_parkway), getString(R.string.loc0), 1.6, 6.50 , R.drawable.queens));
+        parkingList.add(new ParkingLocation(getString(R.string.humber), getString(R.string.loc1), 0.2, 8.50 , R.drawable.humber2));
+        parkingList.add(new ParkingLocation(getString(R.string.bloor), getString(R.string.loc2), 3.6, 6.80 , R.drawable.bloor));
+        parkingList.add(new ParkingLocation(getString(R.string.eaton), getString(R.string.loc3), 2.4, 9.00 , R.drawable.eaton));
+        parkingList.add(new ParkingLocation(getString(R.string.york), getString(R.string.loc4), 3.6, 8.50 , R.drawable.yorkdale));
+        parkingList.add(new ParkingLocation(getString(R.string.scotia), getString(R.string.loc5), 15.6, 7.50 , R.drawable.scotia));
+        parkingList.add(new ParkingLocation(getString(R.string.mills), getString(R.string.loc6), 24.6, 10.50 , R.drawable.mills2));
+        parkingList.add(new ParkingLocation(getString(R.string.yonge), getString(R.string.loc7), 11.6, 12.50 , R.drawable.yonge));
+        parkingList.add(new ParkingLocation(getString(R.string.fairview), getString(R.string.loc8), 20.6, 11.75 , R.drawable.fairview));
+        parkingList.add(new ParkingLocation(getString(R.string.square), getString(R.string.loc9), 8.6, 9.50 , R.drawable.square));
 
 
         adapter = new ParkingLocationAdapter(this, parkingList);
         recyclerView.setAdapter(adapter);
 
-
-
-
-
-        i1 = (ImageView)findViewById(R.id.imageView9);
-        i2 = (ImageView)findViewById(R.id.imageView11);
-        i3 = (ImageView)findViewById(R.id.imageView15);
-
-        b1 = (Button)findViewById(R.id.button2);
-        b2 = (Button)findViewById(R.id.button3);
-        b3 = (Button)findViewById(R.id.button4);
-
-        t1 = (TextView)findViewById(R.id.textView9);
-        t2 = (TextView)findViewById(R.id.textView22);
-        t3 = (TextView)findViewById(R.id.textView21);
-        t4 = (TextView)findViewById(R.id.textView16);
-        t5 = (TextView)findViewById(R.id.textView11);
-        t6 = (TextView)findViewById(R.id.textView12);
-        t7 = (TextView)findViewById(R.id.textView18);
-        t8 = (TextView)findViewById(R.id.textView17);
-        t9 = (TextView)findViewById(R.id.textView13);
-        t10 = (TextView)findViewById(R.id.textView14);
-        t11 = (TextView)findViewById(R.id.textView15);
        // userName = findViewById(R.id.nav_user);
        // userEmail = findViewById(R.id.nav_email);
 
@@ -143,7 +120,7 @@ public class MainMenu extends AppCompatActivity {
         StorageReference storageReference = firebaseStorage.getReference();
 
 
-        getSupportActionBar().setTitle("Home");
+        getSupportActionBar().setTitle(getString(R.string.home_title));
 
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -203,9 +180,9 @@ public class MainMenu extends AppCompatActivity {
 
     private void logOutUser(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Confirm Sign-Out");
-        builder.setMessage("Are you sure you want to log-out from this account?");
-        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+        builder.setTitle(getString(R.string.confirm_out));
+        builder.setMessage(getString(R.string.log_outconf));
+        builder.setPositiveButton(getString(R.string.y), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 mAuth.signOut();
@@ -214,7 +191,7 @@ public class MainMenu extends AppCompatActivity {
             }
         });
 
-        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton(getString(R.string.n), new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -230,12 +207,13 @@ public class MainMenu extends AppCompatActivity {
 
 
     private void displayHeaderInfo() {
-
             NavigationView navigationView = findViewById(R.id.nav_view);
             View headerView = navigationView.getHeaderView(0);
             final TextView userName = headerView.findViewById(R.id.nav_user);
             final TextView userEmail = headerView.findViewById(R.id.nav_email);
             final CircleImageView navImage = headerView.findViewById(R.id.imageHeader);
+
+            final ParkingPassInfo parkingPassInfo = new ParkingPassInfo();
 
             //userName.setText(user.getDisplayName());
             //userEmail.setText((user.getEmail()));
@@ -245,7 +223,7 @@ public class MainMenu extends AppCompatActivity {
 
             firebaseStorage = FirebaseStorage.getInstance();
             StorageReference storageReference = firebaseStorage.getReference();
-            storageReference.child(user.getUid()).child("Image/Profile Image").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            storageReference.child(user.getUid()).child(getString(R.string.prof_2)).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
                     Picasso.get().load(uri).fit().centerCrop().into(navImage);

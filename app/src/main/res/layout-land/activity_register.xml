@@ -16,7 +16,7 @@
         android:textColor="#424242"
         app:layout_constraintBottom_toTopOf="@+id/editText7"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintHorizontal_bias="0.344"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -28,7 +28,7 @@
         android:textColor="#424242"
         app:layout_constraintBottom_toTopOf="@+id/editText6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.349"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -40,7 +40,7 @@
         android:textColor="#424242"
         app:layout_constraintBottom_toTopOf="@+id/editText4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.041"
+        app:layout_constraintHorizontal_bias="0.336"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -48,7 +48,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="92dp"
         android:backgroundTint="#424242"
         android:ems="10"
         android:fontFamily="@font/quicksand"
@@ -56,7 +55,7 @@
         android:textColor="#424242"
         app:layout_constraintBottom_toTopOf="@+id/textView23"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.778"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
@@ -69,10 +68,10 @@
         android:fontFamily="@font/quicksand"
         android:inputType="phone"
         android:textColor="#424242"
+        app:layout_constraintBottom_toTopOf="@+id/textView20"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.061"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="281dp" />
+        app:layout_constraintHorizontal_bias="0.762"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText5"
@@ -83,15 +82,16 @@
         android:fontFamily="@font/quicksand"
         android:inputType="textEmailAddress"
         android:textColor="#424242"
+        app:layout_constraintBottom_toTopOf="@+id/textView24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.056"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="202dp" />
+        app:layout_constraintHorizontal_bias="0.612"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:backgroundTint="#424242"
         android:ems="10"
         android:fontFamily="@font/quicksand"
@@ -99,13 +99,14 @@
         android:textColor="#424242"
         app:layout_constraintBottom_toTopOf="@+id/textView25"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.668"
+        app:layout_constraintHorizontal_bias="0.621"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/editText7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
         android:backgroundTint="#424242"
         android:ems="10"
         android:fontFamily="@font/quicksand"
@@ -113,28 +114,30 @@
         android:textColor="#424242"
         app:layout_constraintBottom_toTopOf="@+id/checkBox2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.668"
+        app:layout_constraintHorizontal_bias="0.621"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button5"
         android:layout_width="177dp"
         android:layout_height="47dp"
+        android:layout_marginBottom="32dp"
         android:background="#AED581"
         android:fontFamily="@font/quicksand"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:textAllCaps="false"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/progressBar2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.634"
+        app:layout_constraintHorizontal_bias="0.589"
         app:layout_constraintStart_toStartOf="parent" />
 
     <CheckBox
         android:id="@+id/checkBox2"
         android:layout_width="295dp"
         android:layout_height="20dp"
+        android:layout_marginBottom="12dp"
         android:background="#f4f4f4"
         android:backgroundTint="#f4f4f4"
         android:buttonTint="#90caf9"
@@ -144,7 +147,7 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toTopOf="@+id/button5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.788"
+        app:layout_constraintHorizontal_bias="0.699"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -157,7 +160,7 @@
         android:textColor="#424242"
         app:layout_constraintBottom_toTopOf="@+id/editText3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.055"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -169,13 +172,13 @@
         android:textColor="#424242"
         app:layout_constraintBottom_toTopOf="@+id/editText5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.024"
+        app:layout_constraintHorizontal_bias="0.327"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
-        android:layout_width="688dp"
-        android:layout_height="61dp"
+        android:layout_width="377dp"
+        android:layout_height="48dp"
         android:background="#aed581"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
@@ -213,30 +216,32 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/textView10"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar2"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <ProgressBar
         android:id="@+id/progressBar2"
         style="?android:attr/progressBarStyle"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintHorizontal_bias="0.563"
         app:layout_constraintStart_toStartOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
-        android:layout_marginBottom="84dp"
+        android:layout_width="83dp"
+        android:layout_height="82dp"
+        android:layout_marginEnd="96dp"
         android:src="@drawable/user_transparent"
         app:civ_border_color="#FFFFFF"
         app:civ_border_width="2dp"
-        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
-        tools:layout_editor_absoluteX="561dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/textView27" />
 </androidx.constraintlayout.widget.ConstraintLayout>
