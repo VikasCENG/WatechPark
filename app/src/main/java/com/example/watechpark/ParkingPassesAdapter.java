@@ -90,7 +90,7 @@ public class ParkingPassesAdapter extends RecyclerView.Adapter<ParkingPassesAdap
                 final int lBalance = Integer.parseInt(String.valueOf(parkingPassInfo.getBalance()));
 
                 ParkingPassInfo parkingPassInfo1 = new ParkingPassInfo(lName,lLoc,lCost,lType,lDuration,lValid,lExpiry,lBalance);
-                mDatabase.child(context.getString(R.string.child_info)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                mDatabase.child("ParkingLocation").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .setValue(parkingPassInfo1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

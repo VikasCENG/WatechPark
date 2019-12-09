@@ -105,7 +105,7 @@ public class PaymentFragment extends Fragment {
         String userID = user.getUid();
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference(getString(R.string.parking_pass));
+        databaseReference = firebaseDatabase.getReference("ParkingLocation");
 
         readData();
 
@@ -221,33 +221,34 @@ public class PaymentFragment extends Fragment {
                 final Long time = System.currentTimeMillis() / 1000;
                 final String newTime = time.toString();
 
+                if (isAdded()) { // used to check if fragment includes a context due to error I was having
+                    Orders orders = new Orders(user.getUid(), user.getEmail(), lotName, lotLocation, lotCost, lotType, lotDuration, validFrom, expiry, nBalance, newTime);
+                    databaseReference.child(getString(R.string.orders)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .setValue(orders).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(getContext(), R.string.order_success, Toast.LENGTH_SHORT).show();
 
-                Orders orders = new Orders(user.getUid(),user.getEmail(),lotName,lotLocation,lotCost,lotType,lotDuration,validFrom,expiry,nBalance,newTime);
-                databaseReference.child(getString(R.string.orders)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                        .setValue(orders).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(getContext(), R.string.order_success, Toast.LENGTH_SHORT).show();
-
-                        } else {
-                            Toast.makeText(getContext(), R.string.order_failed,Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getContext(), R.string.order_failed, Toast.LENGTH_SHORT).show();
 
 
-
+                            }
                         }
-                    }
-                });
+                    });
 
 
+                }
             }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getContext(), R.string.data_un, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+                @Override
+                public void onCancelled (@NonNull DatabaseError databaseError){
+                    Toast.makeText(getContext(), R.string.data_un, Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
 
     private String convertTimestamp(String timestamp){
         long yourSeconds = Long.valueOf(timestamp);

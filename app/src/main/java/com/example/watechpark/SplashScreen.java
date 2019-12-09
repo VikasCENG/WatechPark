@@ -1,7 +1,10 @@
 package com.example.watechpark;
 
 import android.Manifest;
+import android.content.Context;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -31,9 +34,14 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
+        if(isTablet(this)){
+            this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         if (Build.VERSION.SDK_INT >= 23) {
             requestPermission();
         }
+
 
 
             findAllViews();
@@ -70,6 +78,10 @@ public class SplashScreen extends AppCompatActivity {
             if (writeStorage != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(SplashScreen.this, PERMISSION, 1);
             }
+        }
+
+        public static boolean isTablet(Context context){
+        return(context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
         }
 
 }

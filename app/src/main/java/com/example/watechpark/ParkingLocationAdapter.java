@@ -212,9 +212,11 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                 final double cost = Double.parseDouble(String.valueOf(parkingLocation.getCost()));
                 final int image = Integer.parseInt(String.valueOf(parkingLocation.getLotImage()));
 
+                mDatabase = FirebaseDatabase.getInstance().getReference("ParkingLocations");
+
                 ParkingLocation parkingLocation1 = new ParkingLocation(name,location,distance,cost,image);
                 mDatabase.child(user.getUid()).setValue(parkingLocation1);
-                mDatabase.child(context.getString(R.string.child_parkingloc)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                mDatabase.child("ParkingLocations").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                         .setValue(parkingLocation1).addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {

@@ -52,7 +52,7 @@ public class OrderHistoryFragment extends Fragment {
 
        ordersList = new ArrayList<>();
 
-        databaseReference = FirebaseDatabase.getInstance().getReference(getString(R.string.parkingpass_info)).child(getString(R.string.orders1));
+        databaseReference = FirebaseDatabase.getInstance().getReference("ParkingLocation").child("Orders");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

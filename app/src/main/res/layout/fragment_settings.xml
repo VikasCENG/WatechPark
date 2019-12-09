@@ -12,7 +12,8 @@
         android:layout_width="255dp"
         android:layout_height="54dp"
         android:layout_marginStart="60dp"
-        android:layout_marginBottom="172dp"
+        android:layout_marginBottom="40dp"
+        android:fontFamily="@font/quicksand"
         android:text="@string/set_title"
         android:textColor="#F4F4F4"
         android:textSize="30dp"
@@ -21,11 +22,14 @@
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
-        android:layout_marginBottom="252dp"
+        android:layout_width="134dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="392dp"
+        android:background="#aed581"
+        android:fontFamily="@font/quicksand"
         android:text="@string/select_lang"
+        android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
