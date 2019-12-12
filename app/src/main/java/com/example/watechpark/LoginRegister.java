@@ -54,6 +54,8 @@ public class LoginRegister extends AppCompatActivity {
     int RC_SIGN_IN = 0;
     private GoogleSignInClient mGoogleSignInClient;
 
+    private FirebaseUser currentUser;
+
 
     private ProgressBar progressBar1;
     SharedPreferences sharedPref;
@@ -65,12 +67,10 @@ public class LoginRegister extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findAllViews();
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestEmail()
-                .build();
 
 
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
 
 
         mLoginAuth = FirebaseAuth.getInstance();
@@ -82,6 +82,11 @@ public class LoginRegister extends AppCompatActivity {
         progressBar1.setVisibility(View.GONE);
 
 
+        currentUser = mLoginAuth.getCurrentUser();
+        if(currentUser != null){
+            loadSharedPref();
+            Toast.makeText(getApplicationContext(), getString(R.string.welcome1) + currentUser.getEmail() + getString(R.string.ex), Toast.LENGTH_SHORT).show();
+        }
 
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -146,30 +151,12 @@ public class LoginRegister extends AppCompatActivity {
 
         loadSharedPref();
 
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch ((v.getId())) {
-                    case R.id.sign_in_button:
-                        signIn();
-
-                }
-            }
-        });
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
 
-        FirebaseUser currentUser = mLoginAuth.getCurrentUser();
-        if(currentUser != null){
-            loadSharedPref();
-            Toast.makeText(getApplicationContext(), getString(R.string.welcome1) + currentUser.getEmail() + getString(R.string.ex), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(), MainMenu.class));
-        }
-    }
+
+
 
     private void saveSharedPref(){
         if(signedInStatus.isChecked()) {
@@ -197,42 +184,6 @@ public class LoginRegister extends AppCompatActivity {
         signedInStatus.setChecked(checked);
 
     }
-
-    private void signIn(){
-            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-            startActivityForResult(signInIntent, RC_SIGN_IN);
-
-    }
-
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
-
-        if(requestCode == RC_SIGN_IN){
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
-
-        }
-
-    }
-
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            Toast.makeText(getApplicationContext(), getString(R.string.new_wel)  + account.getDisplayName() , Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(LoginRegister.this, MainMenu.class));
-
-        } catch (ApiException e) {
-            Toast.makeText(LoginRegister.this, R.string.auth_fail, Toast.LENGTH_SHORT).show();
-        }
-
-    }
-
-
-
-
 
     private void loginValidate() {
         final String email = edit.getText().toString();
@@ -269,7 +220,6 @@ public class LoginRegister extends AppCompatActivity {
         image3 = (ImageView) findViewById(R.id.imageView6);
         button = (Button) findViewById(R.id.buttonLogin);
         button1 = (Button) findViewById(R.id.buttonReg);
-        button2 = (SignInButton) findViewById(R.id.sign_in_button);
         button3 = (Button) findViewById(R.id.buttonForgot);
         edit = (EditText) findViewById(R.id.editUser);
         edit1 = (EditText) findViewById(R.id.editPass);

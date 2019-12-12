@@ -121,18 +121,6 @@
         app:layout_constraintBottom_toTopOf="@+id/buttonLogin"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="220dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="16dp"
-        android:background="#f4f4f4"
-        android:backgroundTint="#f4f4f4"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <ImageView
         android:id="@+id/imageView5"
         android:layout_width="39dp"
@@ -156,16 +144,19 @@
 
     <Button
         android:id="@+id/buttonForgot"
-        android:layout_width="211dp"
-        android:layout_height="23dp"
-        android:layout_marginBottom="16dp"
-        android:background="#f4f4f4"
+        android:layout_width="226dp"
+        android:layout_height="42dp"
+        android:layout_marginBottom="40dp"
+        android:background="#aed581"
         android:fontFamily="@font/quicksand"
         android:text="@string/forgot_your_password"
         android:textAllCaps="false"
-        android:textColor="#90caf9"
-        app:layout_constraintBottom_toTopOf="@+id/sign_in_button"
+        android:textColor="#f4f4f4"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
@@ -176,8 +167,6 @@
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.957"
-        app:layout_constraintStart_toEndOf="@+id/sign_in_button" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

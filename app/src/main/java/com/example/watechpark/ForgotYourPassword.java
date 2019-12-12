@@ -58,23 +58,27 @@ public class ForgotYourPassword extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (txt1.isFocused()) {
-                    txt.setEnabled(false);
-                    final String phone = txt1.getText().toString();
-
-                    if (phone.isEmpty()) {
-                        txt1.setError(getString(R.string.phone_requ));
-                        txt1.requestFocus();
-                    }
-
+                final String phone = txt1.getText().toString();
+                final String email = txt.getText().toString();
+                if (phone.isEmpty()) {
+                    txt1.setError(getString(R.string.phone_requ));
+                    txt1.requestFocus();
+                }
+                else{
                     sendSMS(phone);
+                }
+                if (email.isEmpty()) {
+                    txt.setError("Email is required");
+                    txt.requestFocus();
+                } else {
 
-
-                } else if(txt.isFocused()){
                     txt1.setEnabled(false);
+
+
                     resetEmail();
 
                 }
+
             }
         });
 

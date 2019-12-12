@@ -94,8 +94,10 @@ public class Register extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 registerValidate();
             }
+
         });
     }
 
@@ -179,7 +181,7 @@ public class Register extends AppCompatActivity {
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
                                     Toast.makeText(getApplicationContext(), R.string.prof_up, Toast.LENGTH_SHORT).show();
-                                    finish();
+
                                 }
                             });
 
@@ -202,10 +204,6 @@ public class Register extends AppCompatActivity {
         }
 
 
-    private void startLoginActivity(){
-
-       startActivity(new Intent(getApplicationContext(), LoginRegister.class));
-    }
 
     private void findAllViews(){
       textPassword = findViewById(R.id.textView25);
