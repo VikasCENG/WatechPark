@@ -22,6 +22,10 @@ red = LED(17)
 green = LED(18)
 blue = LED(27)
 
+open1 = 0
+occupied = 1
+
+
 def turnOff():
     red.off()
     green.off()
@@ -64,7 +68,23 @@ try:
 # Convert the data
 #luminance = data[0] * 256 + data[1]
         proximity = data[2] * 256 + data[3]
-
+   
+        global db
+        config = {
+        "apiKey": "AIzaSyBHz-ZrX8ANSYz3qcVdbjQ_KvpX8Kz3PnU",
+        "authDomain": "watechpark.firebaseapp.com",
+        "databaseURL": "https://watechpark.firebaseio.com",
+        "storageBucket": "watechpark.appspot.com"
+        }
+        firebase = pyrebase.initialize_app(config)
+        db = firebase.database()
+        
+                    
+        seconds = time.time()
+        a = {"proximity": proximity,"Spot 1": occupied, 
+        "timestamp": str(int(math.ceil(seconds)))}
+        b = {"proximity": proximity,"Spot 1": open1, 
+        "timestamp": str(int(math.ceil(seconds)))}
 
 # Output data to screen
     
@@ -74,6 +94,9 @@ try:
             
             print("\nParking space is available")
             print("Proximity of the Device : %d" %proximity)
+            print(bool(open1))
+            db.child("ProximityData").push(b)
+            print("Proximity data successfully updated to Firebase!\n")
             sleep(2)
             turnOff()
         elif(proximity>5000):
@@ -82,6 +105,9 @@ try:
             print("\nParking space is full")
             print("Gate is closing!")
             print("Proximity of the Device : %d" %proximity)
+            print(bool(occupied))
+            db.child("ProximityData").push(a)
+            print("Proximity data successfully updated to Firebase!\n")
             sleep(2)
             turnOff()
             #red.off()
@@ -97,10 +123,7 @@ try:
 
             sleep(2)
             turnOff()
-            
-            seconds = time.time()
-            a = {"proximity": proximity,
-            "timestamp": str(int(math.ceil(seconds)))}
+
     
             db.child("ProximityData").push(a)
             print("Proximity data successfully updated to Firebase!\n")
