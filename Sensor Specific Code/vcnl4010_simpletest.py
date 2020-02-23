@@ -31,16 +31,6 @@ def turnOff():
     green.off()
     blue.off()
     
-
-    global db
-    config = {
-    "apiKey": "AIzaSyBHz-ZrX8ANSYz3qcVdbjQ_KvpX8Kz3PnU",
-    "authDomain": "watechpark.firebaseapp.com",
-    "databaseURL": "https://watechpark.firebaseio.com",
-    "storageBucket": "watechpark.appspot.com"
-    }
-    firebase = pyrebase.initialize_app(config)
-    db = firebase.database()
     
 try:     
     while True:
