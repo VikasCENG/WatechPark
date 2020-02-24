@@ -22,15 +22,16 @@ red = LED(17)
 green = LED(18)
 blue = LED(27)
 
+# Sensor 1 Status
 open1 = 0
 occupied1 = 1
-
+# Sensor 2 Status
 open2 = 0
 occupied2 = 1
-
+# Sensor 3 Status
 open3 = 0
 occupied3 = 1
-
+# Sensor 4 Status
 open4 = 0
 occupied4 = 1
 
@@ -81,7 +82,7 @@ try:
                     
         seconds = time.time()
         
-        # Sensor 1 Data
+        # Sensor Data
         a = {"proximity": proximity,"Slot 1A": occupied1,
         "timestamp": str(int(math.ceil(seconds)))}
         b = {"proximity": proximity,"Slot 1A": open1,
