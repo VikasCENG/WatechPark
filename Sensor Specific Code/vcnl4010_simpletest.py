@@ -23,7 +23,16 @@ green = LED(18)
 blue = LED(27)
 
 open1 = 0
-occupied = 1
+occupied1 = 1
+
+open2 = 0
+occupied2 = 1
+
+open3 = 0
+occupied3 = 1
+
+open4 = 0
+occupied4 = 1
 
 
 def turnOff():
@@ -71,10 +80,15 @@ try:
         
                     
         seconds = time.time()
-        a = {"proximity": proximity,"Spot 1": occupied, 
+        
+        # Sensor 1 Data
+        a = {"proximity": proximity,"Slot 1A": occupied1,
         "timestamp": str(int(math.ceil(seconds)))}
-        b = {"proximity": proximity,"Spot 1": open1, 
+        b = {"proximity": proximity,"Slot 1A": open1,
         "timestamp": str(int(math.ceil(seconds)))}
+        
+        
+        
 
 # Output data to screen
     
@@ -82,21 +96,29 @@ try:
         if(proximity<=2500):
             green.on()
             
-            print("\nParking space is available")
-            print("Proximity of the Device : %d" %proximity)
+            print("\nSlot 1A is available")
+            print("\nSlot 2B is available")
+            print("\nSlot 3C is available")
+            print("\nSlot 4D is available")
+            print("Proximity of Sensor 1 : %d" %proximity)
             print(bool(open1))
-            db.child("ProximityData").push(b)
+            print(bool(open2))
+            print(bool(open3))
+            print(bool(open4))
+            db.child("ProximityData").set(b)
             print("Proximity data successfully updated to Firebase!\n")
             sleep(2)
             turnOff()
         elif(proximity>5000):
             red.blink()
            
-            print("\nParking space is full")
-            print("Gate is closing!")
-            print("Proximity of the Device : %d" %proximity)
-            print(bool(occupied))
-            db.child("ProximityData").push(a)
+            print("\nSlot 1A is currently occupied")
+            print("Proximity of Sensor 1 : %d" %proximity)
+            print(bool(occupied1))
+            print(bool(occupied2))
+            print(bool(occupied3))
+            print(bool(occupied4))
+            db.child("ProximityData").set(a)
             print("Proximity data successfully updated to Firebase!\n")
             sleep(2)
             turnOff()
@@ -105,8 +127,7 @@ try:
             blue.on()
         
             print("\nCar is approaching the parking space")
-            print("Gate is opening...")
-            print("Proximity of the Device : %d" %proximity)
+            print("Proximity of Sensor 1 : %d" %proximity)
             sleep(2)
             turnOff()
             #blue.off()
@@ -115,10 +136,11 @@ try:
             turnOff()
 
     
-            db.child("ProximityData").push(a)
+            db.child("ProximityData").set(a)
             print("Proximity data successfully updated to Firebase!\n")
         else:
             print("Failed to push proximity data to Firebase!\n")
+            
             
 finally:
     
