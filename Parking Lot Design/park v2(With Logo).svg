@@ -220,8 +220,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="2.1649824"
-     inkscape:cx="546.99658"
-     inkscape:cy="802.05936"
+     inkscape:cx="525.74929"
+     inkscape:cy="953.09985"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -239,7 +239,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -456,14 +456,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:7.63474035px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.19086851"
-       x="90.747391"
+       x="97.626564"
        y="21.799017"
        id="text5345"><tspan
          sodipodi:role="line"
          id="tspan5343"
-         x="90.747391"
+         x="97.626564"
          y="21.799017"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.64735985px;font-family:Dark;-inkscape-font-specification:'Dark Bold';stroke-width:0.19086851">The Watech Park</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:6.64735985px;font-family:Dark;-inkscape-font-specification:'Dark Bold';stroke-width:0.19086851">WatechPark</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:10.58333302px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
