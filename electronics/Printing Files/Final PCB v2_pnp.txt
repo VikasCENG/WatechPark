@@ -1,0 +1,31 @@
+*Pick And Place List
+*Company=
+*Author=
+*eMail=
+*
+*Project=Final PCB v2
+*Date=22:16:14
+*CreatedBy=Fritzing 0.9.4.2019-12-01.CD-498-0-a1ffcea
+*
+*
+*Coordinates in mm, always center of component
+*Origin 0/0=Lower left corner of PCB
+*Rotation in degree (0-360, math. pos.)
+*
+*No;Value;Package;X;Y;Rotation;Side;Name
+1;;;39.2289;-46.6231;0;Bottom;Via10
+2;;;7.73288;-11.5712;0;Bottom;Via2
+3;;;40.4989;-15.2541;0;Bottom;Part1
+4;;;74.5348;-12.0792;0;Bottom;Via13
+5;;;18.9089;-35.7011;0;Bottom;Via6
+6;;;13.8289;-47.1311;0;Bottom;Via3
+7;;;74.5347;-21.7313;0;Bottom;Via12
+8;;;11.2889;-40.2731;0;Bottom;Via4
+9;;;42.8706;-28.6001;0;Bottom;Raspberry Pi 4
+10;;;27.7989;-37.4791;180;Bottom;Part2
+11;;molex-1x4_lock;78.3449;-5.34807;0;Bottom;JP1
+12;;THT;49.6387;-35.3956;-90;Bottom;IR1
+13;;;37.1969;-49.4171;0;Bottom;Via9
+14;;;41.7689;-44.0831;0;Bottom;Via11
+15;;;29.0689;-35.7011;0;Bottom;Via7
+16;;;6.46289;-49.4171;0;Bottom;Via8
