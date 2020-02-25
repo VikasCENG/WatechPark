@@ -19,10 +19,10 @@ falseCheck = 1
 
 global db
 config = {
-"apiKey": "AIzaSyBHz-ZrX8ANSYz3qcVdbjQ_KvpX8Kz3PnU",
-"authDomain": "watechpark.firebaseapp.com",
-"databaseURL": "https://watechpark.firebaseio.com",
-"storageBucket": "watechpark.appspot.com"
+"apiKey": "",
+"authDomain": "",
+"databaseURL": "",
+"storageBucket": ""
 }
 
 firebase = pyrebase.initialize_app(config)
