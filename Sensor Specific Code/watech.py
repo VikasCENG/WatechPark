@@ -36,16 +36,21 @@ falseCheck = 0
 seconds = time.time()
 
 i2c = busio.I2C(SCL,SDA)
+#might need to use this instead i2c = busio.I2C(board.SCL,board.SDA)
 
+#Sensor variabl declaration
 global pca = PCA9685(i2c)
 pca.frequency = 50
+vcnl = adafruit_vcnl4010.VCNL4010(i2c)
+prox = vcnl.proximity
+
 
 #GPIO Setup
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(ent_ir,GPIO.IN)
 GPIO.setup(ext_ir,GPIO.IN)
 
-# Sensor Data
+# IR Sensor Data
 global noEntry = {"Status": falseCheck, "timestamp": str(int(math.ceil(seconds)))}
 global entry = {"Status": trueCheck, "timestamp": str(int(math.ceil(seconds)))}
 
@@ -76,7 +81,12 @@ try:
             print("Vehicle detected at entry")
             print("Gate status successfully updated to Firebase!\n")
         #parking spot part
-        
+        if(prox<=2500):
+            #car is on spot condition
+            print("spot is now taken")
+        elif(prox>=5000):
+            #no car is around
+            print("spot is open")
             
 
 
