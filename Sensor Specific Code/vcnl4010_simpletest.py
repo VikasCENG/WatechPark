@@ -71,10 +71,10 @@ try:
    
         global db
         config = {
-        "apiKey": "",
-        "authDomain": "",
-        "databaseURL": "",
-        "storageBucket": ""
+        "apiKey": "AIzaSyBHz-ZrX8ANSYz3qcVdbjQ_KvpX8Kz3PnU",
+        "authDomain": "watechpark.firebaseapp.com",
+        "databaseURL": "https://watechpark.firebaseio.com",
+        "storageBucket": "watechpark.appspot.com"
         }
         firebase = pyrebase.initialize_app(config)
         db = firebase.database()
@@ -98,14 +98,14 @@ try:
             green.on()
             
             print("\nSlot 1A is available")
-            print("\nSlot 2B is available")
-            print("\nSlot 3C is available")
-            print("\nSlot 4D is available")
+            print("\nSlot 2B is occupied")
+            print("\nSlot 3C is occupied")
+            print("\nSlot 4D is occupied")
             print("Proximity of Sensor 1 : %d" %proximity)
             print(bool(open1))
-            print(bool(open2))
-            print(bool(open3))
-            print(bool(open4))
+            print(bool(occupied2))
+            print(bool(occupied3))
+            print(bool(occupied4))
             db.child("ProximityData").set(b)
             print("Proximity data successfully updated to Firebase!\n")
             sleep(2)
@@ -116,8 +116,11 @@ try:
             print("\nSlot 1A is currently occupied")
             print("Proximity of Sensor 1 : %d" %proximity)
             print(bool(occupied1))
+            print("\nSlot 2B is currently occupied")
             print(bool(occupied2))
+            print("\nSlot 3C is currently occupied")
             print(bool(occupied3))
+            print("\nSlot 4D is currently occupied")
             print(bool(occupied4))
             db.child("ProximityData").set(a)
             print("Proximity data successfully updated to Firebase!\n")
