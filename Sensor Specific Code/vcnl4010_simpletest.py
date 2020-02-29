@@ -83,9 +83,9 @@ try:
         seconds = time.time()
         
         # Sensor Data
-        a = {"proximity": proximity,"Slot 1A": occupied1,
+        a = {"proximity": proximity,"Slot 1A": occupied1,"Slot 2B": occupied2, "Slot 3C": occupied3, "Slot 4D": occupied4,
         "timestamp": str(int(math.ceil(seconds)))}
-        b = {"proximity": proximity,"Slot 1A": open1,
+        b = {"proximity": proximity,"Slot 1A": open1,"Slot 2B": occupied2, "Slot 3C": occupied3, "Slot 4D": occupied4,
         "timestamp": str(int(math.ceil(seconds)))}
         
         
@@ -96,15 +96,14 @@ try:
 #print "Ambient Light Luminance : %d lux" %luminance
         if(proximity<=2500):
             green.on()
-            
             print("\nSlot 1A is available")
-            print("\nSlot 2B is occupied")
-            print("\nSlot 3C is occupied")
-            print("\nSlot 4D is occupied")
             print("Proximity of Sensor 1 : %d" %proximity)
             print(bool(open1))
+            print("\nSlot 2B is occupied")
             print(bool(occupied2))
+            print("\nSlot 3C is occupied")
             print(bool(occupied3))
+            print("\nSlot 4D is occupied")
             print(bool(occupied4))
             db.child("ProximityData").set(b)
             print("Proximity data successfully updated to Firebase!\n")
