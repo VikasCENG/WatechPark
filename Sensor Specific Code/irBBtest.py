@@ -8,28 +8,28 @@
 import time
 import RPi.GPIO as GPIO
 
-Gpio_Pin=10
+Gpio_Pin=0
 
 #setup GPIO pin as input to read value for HIGH or LOW
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(Gpio_Pin,GPIO.IN)
 
 try:
-	while True:
-		x = GPIO.input(Gpio_Pin)
-		if(x==1):
-			print("Solid,LED OFF")
-		if(x==0):
-        		print("Beam Broken,LED ON")
-		
-		time.sleep(2.0)		
-	
+    while True:
+        x = GPIO.input(Gpio_Pin)
+        if(x==1):
+            print("Solid,LED OFF")
+        if(x==0):
+                print("Beam Broken,LED ON")
+        
+        time.sleep(2.0)     
+    
 except KeyboardInterrupt:
-	print("CTRL+C clicked")
+    print("CTRL+C clicked")
 
 except:
-	print("some error occurred")
+    print("some error occurred")
 
 finally:
-	GPIO.cleanup()
+    GPIO.cleanup()
 
