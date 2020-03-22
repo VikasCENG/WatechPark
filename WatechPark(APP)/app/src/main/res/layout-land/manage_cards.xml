@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardBackgroundColor="#f4f4f4"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="1dp"
+    android:layout_margin="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/textView44"
+            android:layout_width="122dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="171dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/mng_lic"
+            android:textColor="#424242"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/button12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/textView43" />
+
+        <TextView
+            android:id="@+id/textView43"
+            android:layout_width="120dp"
+            android:layout_height="27dp"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/m_make"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView34"
+            app:layout_constraintEnd_toStartOf="@+id/textView35"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView35"
+            android:layout_width="213dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/time_added"
+            android:textColor="#424242"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/button12"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:id="@+id/textView33"
+            android:layout_width="112dp"
+            android:layout_height="28dp"
+            android:layout_marginBottom="16dp"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/col"
+            android:textAlignment="viewStart"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button9"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textView34"
+            android:layout_width="108dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="40dp"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/model1"
+            android:textColor="#424242"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toTopOf="@+id/textView33"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/button9"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="20dp"
+            android:backgroundTint="#90caf9"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/ed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button12" />
+
+        <Button
+            android:id="@+id/button12"
+            android:layout_width="96dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="28dp"
+            android:backgroundTint="#ff6f60"
+            android:fontFamily="@font/quicksand"
+            android:text="@string/del"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
