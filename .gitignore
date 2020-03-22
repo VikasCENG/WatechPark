@@ -12,3 +12,6 @@
 /captures
 .externalNativeBuild
 .cxx
+
+WatechPark(APP)/app/.idea/
+WatechPark(APP)/app/build/
