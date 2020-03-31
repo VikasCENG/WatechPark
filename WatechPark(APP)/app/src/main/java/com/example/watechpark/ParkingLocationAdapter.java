@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,6 +49,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /*
 * Project: WatechPark
@@ -123,23 +127,28 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                 mDatabase2 = FirebaseDatabase.getInstance().getReference().child("GateStatus");
                 // listen for active changes in the ProximityData structure
                 mDatabase.addValueEventListener(new ValueEventListener() {
+
+
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                         // read and store the data inside the ProximityData structure into a object of the class
-                        ProximityData proximityData = dataSnapshot.getValue(ProximityData.class);
+                        final ProximityData proximityData = dataSnapshot.getValue(ProximityData.class);
                         // get the data stored in the Cars data structure and store it into a Cars object
+
+
                         Cars cars = dataSnapshot.getValue(Cars.class);
                         // use a intent to send the name of the chosen lot from the main menu to the "View Details" pop-up(data screen)
                         Intent intent = new Intent();
                         intent.putExtra(context.getString(R.string.put_name), parkingLocationList.get(position).getLotName());
-                        // retreieve the name of the lot and store it into a String variable
+                        // retrieve the name of the lot and store it into a String variable
                         String lotName = intent.getStringExtra(context.getString(R.string.getname));
 
                         //String proximity1 = ds.getValue(ProximityData.class).getProximity();
 
                         // create a new AlertDialog box
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                         // inflate the view for the layout from the res folder
                         final View view = LayoutInflater.from(context).inflate(R.layout.activity_lot_detail, null);
                         TextView text = view.findViewById(R.id.textView36);
@@ -149,19 +158,21 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                         final EditText adminPass = view.findViewById(R.id.editText16);
                         // get the value entered by the user in the EditText field, store into a string variable
                         final String plate = adminPass.getText().toString().trim();
-                        //adminPass.setText("admin");
+                        //adminPass.setText("admin")
+
                         Button adminBtn = view.findViewById(R.id.button3);
                         // open gate button
                         adminBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
                                 // check if what is entered by the user equals "admin"
                                 if (adminPass.getText().toString().equals("admin")) {
 
                                     // get a new object of the AdminControl class
                                     AdminControl status = new AdminControl();
                                     // if it equals/matches the "admin" string value then present a success messgae and open the gate
-                                    Toast.makeText(context, "Admin Access Activated: Gate is OPEN", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "Admin Access Activated: Gate is OPEN", Toast.LENGTH_SHORT).show();
 
                                     // get a instance or reference of the AdminControl class and push the value of 1(open gate) to the AdminControl structure
                                     FirebaseDatabase.getInstance().getReference("AdminControl").child("adminStatus").setValue(status.getAdminEntry());
@@ -171,7 +182,7 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                                 } else {
                                     AdminControl status = new AdminControl();
                                     // else don't allow access and present a toast for unsuccessful entry
-                                    Toast.makeText(context, "Unauthorized Admin Access! Invalid Credentials", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "Unauthorized Admin Access! Invalid Credentials", Toast.LENGTH_SHORT).show();
                                     // set the value as false and push a 0 to the AdminControl structure in the adminStatus child
                                     FirebaseDatabase.getInstance().getReference("AdminControl").child("adminStatus").setValue(status.getAdminEntry0());
                                     ImageView adminEntry = view.findViewById(R.id.imageEntry);
@@ -184,9 +195,11 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                             }
                         });
 
+
                         TextView prox = view.findViewById(R.id.textView42);
-                        // get the proximity from the ProximityData structure and set the TextView
+                        //get the proximity from the ProximityData structure and set the TextView
                         prox.setText("RT Proximity: " + String.valueOf(proximityData.getProximity()));
+
                         TextView s1 = view.findViewById(R.id.textSlot1);
                         String slot1 = String.valueOf(proximityData.getSlot1A());
                         TextView s2 = view.findViewById(R.id.textSlot2);
@@ -223,8 +236,8 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                             s3.setText("Occupied");
                             s4.setText("Occupied");
                             // update the overall status of the lot
-                            status.setText(context.getString(R.string.setstatus2) + " Slot 1A is available -- (1/4)");
-                            Toast.makeText(context, "LOT HC: ENTRY IS ALLOWED! GATE IS OPEN", Toast.LENGTH_LONG).show();
+                            status.setText(context.getString(R.string.setstatus2) + " Slot 1A is available -- (1/4) ENTRY IS ALLOWED!");
+                            //Toast.makeText(context, "LOT HC: ENTRY IS ALLOWED!", Toast.LENGTH_SHORT).show();
 
                             spot1.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -266,7 +279,7 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
 
                                                                 .setTicker(context.getString(R.string.not))
                                                                 .setContentTitle(context.getString(R.string.reserved_aspot) + name)
-                                                                .setContentText(context.getString(R.string.check_pass))
+                                                                .setContentText("Slot 1A booked! Please proceed to Payment after selecting your Parking Pass...")
                                                                 .setSmallIcon(R.drawable.logo)
                                                                 .build();
 
@@ -294,12 +307,10 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                                             ImageView ex2 = view.findViewById(R.id.imageExit);
                                             ex2.setColorFilter(context.getResources().getColor(R.color.colorGreen));
                                             TextView status2 = view.findViewById(R.id.textView37);
-                                            Toast.makeText(context,"Slot 1A booked! Please proceed to Payment after selecting your Parking Pass...",Toast.LENGTH_LONG).show();
                                             // update the overall status to indiate all spots are taken
                                             status2.setText(context.getString(R.string.setstatus2) + " All slots are occupied! -- (4/4)");
                                             // push a 0 to the AdminControl data strcuture
                                             FirebaseDatabase.getInstance().getReference("AdminControl").child("adminStatus").setValue(status.getAdminEntry0());
-                                            Toast.makeText(context, "LOT HC: ENTRY IS NOT ALLOWED", Toast.LENGTH_LONG).show();
 
 
                                         }
@@ -312,8 +323,8 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                             // update the slot color changes
                             ImageView en2 = view.findViewById(R.id.imageEntry);
                             en2.setColorFilter(context.getResources().getColor(R.color.colorRed));
-                            ImageView ex2 = view.findViewById(R.id.imageExit);
-                            ex2.setColorFilter(context.getResources().getColor(R.color.colorGreen));
+                            ImageView exit = view.findViewById(R.id.imageExit);
+                            exit.setColorFilter(context.getResources().getColor(R.color.colorGreen));
                             ImageView spot1 = view.findViewById(R.id.imageSpot1);
                             spot1.setBackgroundResource(R.color.colorRed);
                             // Slot 2B,3C,4D will remain occupied(with color red as the background)
@@ -331,12 +342,12 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                             spot1.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Toast.makeText(context," All slots are occupied currently! Please wait a while for a opening...",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context," All slots are occupied currently! Please wait a while for a opening...",Toast.LENGTH_SHORT).show();
                                 }
                             });
                             // update the overall status
-                            status.setText(context.getString(R.string.setstatus2) + " All slots are occupied! -- (4/4)");
-                            Toast.makeText(context, "LOT HC: ENTRY IS NOT ALLOWED! LOT IS FULL", Toast.LENGTH_LONG).show();
+                            status.setText(context.getString(R.string.setstatus2) + " All slots are occupied! -- (4/4) ENTRY IS NOT ALLOWED!");
+                            //Toast.makeText(context, "LOT HC: ENTRY IS NOT ALLOWED! LOT IS FULL", Toast.LENGTH_SHORT).show();
 
                             // initialize a new EntryStatus object
                             EntryStatus stat = new EntryStatus();
@@ -391,19 +402,19 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                         long gate = dataSnapshot.child("Status").getValue(Long.class);
                         GateStatus g = dataSnapshot.getValue(GateStatus.class);
                         final View view = LayoutInflater.from(context).inflate(R.layout.activity_lot_detail, null);
-
+                        final TextView status = view.findViewById(R.id.textView37);
                         // check if value is equal to 1
                         if (gate == 1) {
                             final Long time = System.currentTimeMillis() / 1000;
                             final String newTime = time.toString();
-
+                           // status.setText(context.getString(R.string.setstatus2) + "License Plate # verification completed!");
                             // retrieve the status of entry and the timestamp from the GateStatus data structure
-                            Toast.makeText(context, "HC LOT: Car has ENTERED the lot! Time: " + convertTimestamp(g.getTimestamp()), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "HC LOT: 1A5-E8K verified! Car has ENTERED the lot! Time: " + convertTimestamp(g.getTimestamp()), Toast.LENGTH_SHORT).show();
                         }
-                        // otherwise(0) for exit
-                        if (gate == 0) {
-                            Toast.makeText(context, "HC LOT: Car has EXITED the lot!", Toast.LENGTH_LONG).show();
-                        }
+
+
+
+
 
 
                     }
@@ -411,7 +422,7 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
+                }
                 });
             }
         });
@@ -426,23 +437,28 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                 mDatabase2 = FirebaseDatabase.getInstance().getReference().child("GateStatus");
                 // listen for active changes in the ProximityData structure
                 mDatabase.addValueEventListener(new ValueEventListener() {
+
+
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                         // read and store the data inside the ProximityData structure into a object of the class
-                        ProximityData proximityData = dataSnapshot.getValue(ProximityData.class);
+                        final ProximityData proximityData = dataSnapshot.getValue(ProximityData.class);
                         // get the data stored in the Cars data structure and store it into a Cars object
+
+
                         Cars cars = dataSnapshot.getValue(Cars.class);
                         // use a intent to send the name of the chosen lot from the main menu to the "View Details" pop-up(data screen)
                         Intent intent = new Intent();
                         intent.putExtra(context.getString(R.string.put_name), parkingLocationList.get(position).getLotName());
-                        // retreieve the name of the lot and store it into a String variable
+                        // retrieve the name of the lot and store it into a String variable
                         String lotName = intent.getStringExtra(context.getString(R.string.getname));
 
                         //String proximity1 = ds.getValue(ProximityData.class).getProximity();
 
                         // create a new AlertDialog box
-                        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                        final AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                         // inflate the view for the layout from the res folder
                         final View view = LayoutInflater.from(context).inflate(R.layout.activity_lot_detail, null);
                         TextView text = view.findViewById(R.id.textView36);
@@ -452,19 +468,21 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                         final EditText adminPass = view.findViewById(R.id.editText16);
                         // get the value entered by the user in the EditText field, store into a string variable
                         final String plate = adminPass.getText().toString().trim();
-                        //adminPass.setText("admin");
+                        //adminPass.setText("admin")
+
                         Button adminBtn = view.findViewById(R.id.button3);
                         // open gate button
                         adminBtn.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
+
                                 // check if what is entered by the user equals "admin"
                                 if (adminPass.getText().toString().equals("admin")) {
 
                                     // get a new object of the AdminControl class
                                     AdminControl status = new AdminControl();
                                     // if it equals/matches the "admin" string value then present a success messgae and open the gate
-                                    Toast.makeText(context, "Admin Access Activated: Gate is OPEN", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "Admin Access Activated: Gate is OPEN", Toast.LENGTH_SHORT).show();
 
                                     // get a instance or reference of the AdminControl class and push the value of 1(open gate) to the AdminControl structure
                                     FirebaseDatabase.getInstance().getReference("AdminControl").child("adminStatus").setValue(status.getAdminEntry());
@@ -474,7 +492,7 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                                 } else {
                                     AdminControl status = new AdminControl();
                                     // else don't allow access and present a toast for unsuccessful entry
-                                    Toast.makeText(context, "Unauthorized Admin Access! Invalid Credentials", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context, "Unauthorized Admin Access! Invalid Credentials", Toast.LENGTH_SHORT).show();
                                     // set the value as false and push a 0 to the AdminControl structure in the adminStatus child
                                     FirebaseDatabase.getInstance().getReference("AdminControl").child("adminStatus").setValue(status.getAdminEntry0());
                                     ImageView adminEntry = view.findViewById(R.id.imageEntry);
@@ -487,9 +505,11 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                             }
                         });
 
+
                         TextView prox = view.findViewById(R.id.textView42);
-                        // get the proximity from the ProximityData structure and set the TextView
+                        //get the proximity from the ProximityData structure and set the TextView
                         prox.setText("RT Proximity: " + String.valueOf(proximityData.getProximity()));
+
                         TextView s1 = view.findViewById(R.id.textSlot1);
                         String slot1 = String.valueOf(proximityData.getSlot1A());
                         TextView s2 = view.findViewById(R.id.textSlot2);
@@ -526,8 +546,8 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                             s3.setText("Occupied");
                             s4.setText("Occupied");
                             // update the overall status of the lot
-                            status.setText(context.getString(R.string.setstatus2) + " Slot 1A is available -- (1/4)");
-                            Toast.makeText(context, "LOT HC: ENTRY IS ALLOWED! GATE IS OPEN", Toast.LENGTH_LONG).show();
+                            status.setText(context.getString(R.string.setstatus2) + " Slot 1A is available -- (1/4) ENTRY IS ALLOWED!");
+                            //Toast.makeText(context, "LOT HC: ENTRY IS ALLOWED!", Toast.LENGTH_SHORT).show();
 
                             spot1.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -569,7 +589,7 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
 
                                                                 .setTicker(context.getString(R.string.not))
                                                                 .setContentTitle(context.getString(R.string.reserved_aspot) + name)
-                                                                .setContentText(context.getString(R.string.check_pass))
+                                                                .setContentText("Slot 1A booked! Please proceed to Payment after selecting your Parking Pass...")
                                                                 .setSmallIcon(R.drawable.logo)
                                                                 .build();
 
@@ -597,12 +617,10 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                                             ImageView ex2 = view.findViewById(R.id.imageExit);
                                             ex2.setColorFilter(context.getResources().getColor(R.color.colorGreen));
                                             TextView status2 = view.findViewById(R.id.textView37);
-                                            Toast.makeText(context,"Slot 1A booked! Please proceed to Payment after selecting your Parking Pass...",Toast.LENGTH_LONG).show();
                                             // update the overall status to indiate all spots are taken
                                             status2.setText(context.getString(R.string.setstatus2) + " All slots are occupied! -- (4/4)");
                                             // push a 0 to the AdminControl data strcuture
                                             FirebaseDatabase.getInstance().getReference("AdminControl").child("adminStatus").setValue(status.getAdminEntry0());
-                                            Toast.makeText(context, "LOT HC: ENTRY IS NOT ALLOWED", Toast.LENGTH_LONG).show();
 
 
                                         }
@@ -615,8 +633,8 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                             // update the slot color changes
                             ImageView en2 = view.findViewById(R.id.imageEntry);
                             en2.setColorFilter(context.getResources().getColor(R.color.colorRed));
-                            ImageView ex2 = view.findViewById(R.id.imageExit);
-                            ex2.setColorFilter(context.getResources().getColor(R.color.colorGreen));
+                            ImageView ex5 = view.findViewById(R.id.imageExit);
+                            ex5.setColorFilter(context.getResources().getColor(R.color.colorGreen));
                             ImageView spot1 = view.findViewById(R.id.imageSpot1);
                             spot1.setBackgroundResource(R.color.colorRed);
                             // Slot 2B,3C,4D will remain occupied(with color red as the background)
@@ -634,12 +652,12 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                             spot1.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    Toast.makeText(context," All slots are occupied currently! Please wait a while for a opening...",Toast.LENGTH_LONG).show();
+                                    Toast.makeText(context," All slots are occupied currently! Please wait a while for a opening...",Toast.LENGTH_SHORT).show();
                                 }
                             });
                             // update the overall status
-                            status.setText(context.getString(R.string.setstatus2) + " All slots are occupied! -- (4/4)");
-                            Toast.makeText(context, "LOT HC: ENTRY IS NOT ALLOWED! LOT IS FULL", Toast.LENGTH_LONG).show();
+                            status.setText(context.getString(R.string.setstatus2) + " All slots are occupied! -- (4/4) ENTRY IS NOT ALLOWED!");
+                            //Toast.makeText(context, "LOT HC: ENTRY IS NOT ALLOWED! LOT IS FULL", Toast.LENGTH_SHORT).show();
 
                             // initialize a new EntryStatus object
                             EntryStatus stat = new EntryStatus();
@@ -694,19 +712,16 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                         long gate = dataSnapshot.child("Status").getValue(Long.class);
                         GateStatus g = dataSnapshot.getValue(GateStatus.class);
                         final View view = LayoutInflater.from(context).inflate(R.layout.activity_lot_detail, null);
-
+                        final TextView status = view.findViewById(R.id.textView37);
                         // check if value is equal to 1
                         if (gate == 1) {
                             final Long time = System.currentTimeMillis() / 1000;
                             final String newTime = time.toString();
-
+                            // status.setText(context.getString(R.string.setstatus2) + "License Plate # verification completed!");
                             // retrieve the status of entry and the timestamp from the GateStatus data structure
-                            Toast.makeText(context, "HC LOT: Car has ENTERED the lot! Time: " + convertTimestamp(g.getTimestamp()), Toast.LENGTH_LONG).show();
+                            Toast.makeText(context, "HC LOT: 1A5-E8K verified! Car has ENTERED the lot! Time: " + convertTimestamp(g.getTimestamp()), Toast.LENGTH_SHORT).show();
                         }
-                        // otherwise(0) for exit
-                        if (gate == 0) {
-                            Toast.makeText(context, "HC LOT: Car has EXITED the lot!", Toast.LENGTH_LONG).show();
-                        }
+
 
 
                     }
@@ -720,6 +735,51 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
             }
         });
 
+        holder.reserveButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+
+            public void onClick(View v) {
+
+                final String name = parkingLocation.getLotName();
+                final String location = parkingLocation.getLotLocation();
+                final double distance = Double.parseDouble(String.valueOf(parkingLocation.getLotDistance()));
+                final double cost = Double.parseDouble(String.valueOf(parkingLocation.getCost()));
+                final int image = Integer.parseInt(String.valueOf(parkingLocation.getLotImage()));
+
+                mDatabase = FirebaseDatabase.getInstance().getReference("ParkingLocations");
+
+                ParkingLocation parkingLocation1 = new ParkingLocation(name,location,distance,cost,image);
+                //mDatabase.child(user.getUid()).setValue(parkingLocation1);
+                mDatabase.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                        .setValue(parkingLocation1).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+
+                        if (task.isSuccessful()) {
+                            Toast.makeText(context, R.string.success_notif, Toast.LENGTH_SHORT).show();
+                            Notification notification = new Notification.Builder(context)
+                                    .setTicker(context.getString(R.string.not))
+                                    .setContentTitle(context.getString(R.string.reserved_aspot) + name)
+                                    .setContentText(context.getString(R.string.check_pass))
+                                    .setSmallIcon(R.drawable.logo)
+                                    .build();
+
+                            notification.flags = Notification.FLAG_AUTO_CANCEL;
+                            NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
+                            notificationManager.notify(0, notification);
+                        } else {
+                            Toast.makeText(context, R.string.data_err, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                });
+
+            }
+
+        });
+
     }
 
    // return the size of the array list for the parking location displayed on the main menu
@@ -728,7 +788,7 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
         return parkingLocationList.size();
     }
 
-    // conver the log format of the timestmap into a readable string form
+    // convert the long format of the timestamp into a readable string form
     private String convertTimestamp(String timestamp){
         long yourSeconds = Long.valueOf(timestamp);
         Date mDate = new Date(yourSeconds * 1000);

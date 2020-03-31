@@ -223,7 +223,7 @@ public class PaymentFragment extends Fragment {
 
                 if (isAdded()) { // used to check if fragment includes a context due to error I was having
                     Orders orders = new Orders(user.getUid(), user.getEmail(), lotName, lotLocation, lotCost, lotType, lotDuration, validFrom, expiry, nBalance, newTime);
-                    databaseReference.child(getString(R.string.orders)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                    FirebaseDatabase.getInstance().getReference("Orders").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(orders).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
