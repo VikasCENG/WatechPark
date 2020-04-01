@@ -16,10 +16,10 @@ from adafruit_motor import servo
 #Firebase initialization
 global db
 config = {
-    "apiKey": "",
-    "authDomain": "",
-    "databaseURL": "",
-    "storageBucket": ""
+    "apiKey": "AIzaSyBHz-ZrX8ANSYz3qcVdbjQ_KvpX8Kz3PnU",
+    "authDomain": "watechpark.firebaseapp.com",
+    "databaseURL": "https://watechpark.firebaseio.com",
+    "storageBucket": "watechpark.appspot.com"
 }
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
@@ -30,7 +30,7 @@ def entGate():
     for i in range(90):
         ent_srv.angle = i
         #gate is open at this point, updating database:
-        #db.child("GateStatus").set(noEntry)
+    db.child("GateStatus").set(noEntry)
     while(GPIO.input(ent_ir)!=1):
           time.sleep(0.5)
     time.sleep(2.0)
@@ -52,6 +52,10 @@ def extGate():
 def camSen():
     return "1A5-E8K"
 
+def licCheck():
+    incommingCar = camSen()
+    getstat = db.child("Cars").get("lplate")
+    print(getstat)
 
 
 #Variable Initialziations
@@ -84,33 +88,36 @@ noEntry = {"Status": falseCheck, "timestamp": str(int(math.ceil(seconds)))}
 global entry
 entry = {"Status": trueCheck, "timestamp": str(int(math.ceil(seconds)))}
 
-#VCNL variables for future usage
-# a = {"proximity": proximity,"Slot 1A": occupied1, "Slot 2B": occupied2, "Slot 3C": occupied3, "Slot 4D": occupied4,
-# "timestamp": str(int(math.ceil(seconds)))}
-# b = {"proximity": proximity,"Slot 1A": open1,"Slot 2B": occupied2, "Slot 3C": occupied3, "Slot 4D": occupied4,
-# "timestamp": str(int(math.ceil(seconds)))}
 
 # Sensor 1A Status
 open1 = 0
 occupied1 = 1
+# Sensor 2 Status
+open2 = 0
+occupied2 = 1
+# Sensor 3 Status
+open3 = 0
+occupied3 = 1
+# Sensor 4 Status
+open4 = 0
+occupied4 = 1
+
 
 #main code:
 try:
     while True:
         #entry sensor part
         entG = GPIO.input(ent_ir)
+        eStat = db.child("EntryStatus").get()
         if(entG==1):
-            print("Solid,LED OFF")
             print("Vehicle currently not detected at entry")
-            #print(bool(falseCheck))
-            #print("Gate status successfully updated to Firebase!\n")
+        if(eStat.val()["lotStatus"]==0):
+            print("Lot is full, all spots are occupied!")
         if(entG==0):
-            print("Beam Broken,LED ON")
             print("Vehicle detected at entry")
             entGate()
-            #print(bool(trueCheck))
             #db.child("GateStatus").set(entry)
-            #print("Gate status successfully updated to Firebase!\n")
+            
         #exit sensor part
 #         extG = GPIO.input(ext_ir)
 #         if(extG==1):
@@ -123,21 +130,30 @@ try:
 #             print("Gate status successfully updated to Firebase!\n")
         #parking spot part
         prox = vcnl.proximity
+        #VCNL variables for future usage
+        a = {"proximity": prox,"Slot 1A": occupied1, "Slot 2B": occupied2, "Slot 3C": occupied3, "Slot 4D": occupied4,
+        "timestamp": str(int(math.ceil(seconds)))}
+        b = {"proximity": prox,"Slot 1A": open1,"Slot 2B": occupied2, "Slot 3C": occupied3, "Slot 4D": occupied4,
+        "timestamp": str(int(math.ceil(seconds)))}
         if(prox<=2500):
             #car is on spot condition
             print("\nSlot 1A is available")
             print("Proximity of Sensor 1 : %d" %prox)
             print(bool(open1))
             #TODO: Pair with an if statement to avoid updating the database when there is no change
-            #db.child("ProximityData").set(b)
+            db.child("ProximityData").set(b)
         elif(prox>=5000):
             #no car is around
             print("\nSlot 1A is currently occupied")
             print("Proximity of Sensor 1 : %d" %prox)
             print(bool(occupied1))
             #TODO: Pair with an if statement to avoid updating the database when there is no change
-            #db.child("ProximityData").set(a)
-        time.sleep(1.0)
+            db.child("ProximityData").set(a)
+        adminC = db.child("AdminControl").get()
+        if(adminC.val()["adminStatus"]==1):
+            entGate()
+            db.child("AdminControl").set({"adminStatus": 0})
+        time.sleep(1)
             
 except KeyboardInterrupt:
     print("CTRL+C clicked")
@@ -149,4 +165,5 @@ finally:
     pca.deinit()
     GPIO.cleanup()
     
+
 
