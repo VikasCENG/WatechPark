@@ -116,7 +116,7 @@ try:
         if(entG==0):
             print("Vehicle detected at entry")
             entGate()
-            #db.child("GateStatus").set(entry)
+            db.child("GateStatus").set(entry)
             
         #exit sensor part
 #         extG = GPIO.input(ext_ir)
