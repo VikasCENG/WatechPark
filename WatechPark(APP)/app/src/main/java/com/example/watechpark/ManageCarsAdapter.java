@@ -37,6 +37,7 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
     private List<Cars> cars;
 
     DatabaseReference databaseReference;
+    DatabaseReference databaseReference1;
 
     private FirebaseAuth mAuth2;
     private FirebaseUser user2;
@@ -86,7 +87,7 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
                     public void onClick(DialogInterface dialog, int which) {
                         mAuth2 = FirebaseAuth.getInstance();
                         user2 = mAuth2.getCurrentUser();
-                        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cars").child(user2.getUid());
+                        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cars").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
                         databaseReference.removeValue();
                         dialog.dismiss();
                         Toast.makeText(context, R.string.cadeleted, Toast.LENGTH_SHORT).show();
@@ -190,7 +191,8 @@ public class ManageCarsAdapter extends RecyclerView.Adapter<ManageCarsAdapter.Ma
     }
 
     private void updateChanges(String make, String model, String color, String number, String time){
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference(context.getString(R.string.cars_data)).child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        //String val = databaseReference.push().getKey();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cars").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
 
         Cars cars2 = new Cars(make,model,color,number,time);
 

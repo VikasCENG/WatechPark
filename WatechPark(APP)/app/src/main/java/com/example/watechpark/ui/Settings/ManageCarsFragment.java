@@ -51,8 +51,7 @@ public class ManageCarsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         carsList = new ArrayList<>();
-
-        databaseReference = FirebaseDatabase.getInstance().getReference("Cars");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Cars");
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

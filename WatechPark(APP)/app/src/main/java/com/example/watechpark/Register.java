@@ -78,6 +78,8 @@ public class Register extends AppCompatActivity {
 
         storageReference = firebaseStorage.getReference();
 
+        profilePic.setImageResource(R.drawable.logo);
+
         profilePic.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
             @Override
@@ -94,8 +96,33 @@ public class Register extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String imageID = System.currentTimeMillis() + "." + getExtension(image);
+                final String fullName = editFullName.getText().toString();
+                final String phone = editPhone.getText().toString();
+                final String email = editEmail.getText().toString();
+                final String username = editUserName.getText().toString();
+                final String password = editPassword.getText().toString();
+                final Long time = System.currentTimeMillis() / 1000;
+                final String timestamp = time.toString();
 
-                registerValidate();
+                if (fullName.isEmpty()) {
+                    editFullName.setError(getString(R.string.full_req));
+                    editFullName.requestFocus();
+                } else if (phone.isEmpty()) {
+                    editPhone.setError(getString(R.string.phone_req));
+                    editPhone.requestFocus();
+                } else if (email.isEmpty()) {
+                    editEmail.setError(getString(R.string.email_req));
+                    editEmail.requestFocus();
+                } else if (username.isEmpty()) {
+                    editUserName.setError(getString(R.string.user_req));
+                    editUserName.requestFocus();
+                } else if (password.isEmpty()) {
+                    editPassword.setError(getString(R.string.psw_req));
+                } else {
+
+                    registerValidate();
+                }
             }
 
         });
@@ -136,30 +163,14 @@ public class Register extends AppCompatActivity {
 
 
     private void registerValidate() {
-        final String imageID = System.currentTimeMillis()+"."+getExtension(image);
-        final String fullName = editFullName.getText().toString().trim();
-        final String phone = editPhone.getText().toString().trim();
-        final String email = editEmail.getText().toString().trim();
-        final String username = editUserName.getText().toString().trim();
-        final String password = editPassword.getText().toString().trim();
-        final Long time = System.currentTimeMillis()/1000;
+        final String imageID = System.currentTimeMillis() + "." + getExtension(image);
+        final String fullName = editFullName.getText().toString();
+        final String phone = editPhone.getText().toString();
+        final String email = editEmail.getText().toString();
+        final String username = editUserName.getText().toString();
+        final String password = editPassword.getText().toString();
+        final Long time = System.currentTimeMillis() / 1000;
         final String timestamp = time.toString();
-
-        if(fullName.isEmpty()) {
-            editFullName.setError(getString(R.string.full_req));
-            editFullName.requestFocus();
-        } else if (phone.isEmpty()) {
-            editPhone.setError(getString(R.string.phone_req));
-            editPhone.requestFocus();
-        } else if (email.isEmpty()) {
-            editEmail.setError(getString(R.string.email_req));
-            editEmail.requestFocus();
-        } else if (username.isEmpty()) {
-            editUserName.setError(getString(R.string.user_req));
-            editUserName.requestFocus();
-        } else if (password.isEmpty()) {
-            editPassword.setError(getString(R.string.psw_req));
-        } else {
 
                 progressBar.setVisibility(View.VISIBLE);
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -173,14 +184,15 @@ public class Register extends AppCompatActivity {
                             uploadTask.addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(getApplicationContext(), R.string.fail_up, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Failed to register account!" + R.string.fail_up, Toast.LENGTH_SHORT).show();
 
                                 }
                             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
 
-                                    Toast.makeText(getApplicationContext(), R.string.prof_up, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(),"Registration successful! Please proceed to Login...", Toast.LENGTH_SHORT).show();
+
 
                                 }
                             });
@@ -190,6 +202,9 @@ public class Register extends AppCompatActivity {
 
                             FirebaseDatabase.getInstance().getReference(getString(R.string.test_user)).child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                     .setValue(user);
+
+                            Intent startLogin = new Intent(getApplicationContext(),LoginRegister.class);
+                            startActivity(startLogin);
 
 
 
@@ -201,8 +216,6 @@ public class Register extends AppCompatActivity {
                     }
                 });
             }
-        }
-
 
 
     private void findAllViews(){

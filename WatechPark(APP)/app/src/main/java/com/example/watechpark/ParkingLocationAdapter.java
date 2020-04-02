@@ -253,47 +253,41 @@ public class ParkingLocationAdapter extends RecyclerView.Adapter<ParkingLocation
                                         @Override
                                         public void onClick(View v) {
 
-
-                                            mDatabase = FirebaseDatabase.getInstance().getReference("ParkingLocations");
-
                                             final String name = parkingLocation.getLotName();
                                             final String location = parkingLocation.getLotLocation();
                                             final double distance = Double.parseDouble(String.valueOf(parkingLocation.getLotDistance()));
                                             final double cost = Double.parseDouble(String.valueOf(parkingLocation.getCost()));
                                             final int image = Integer.parseInt(String.valueOf(parkingLocation.getLotImage()));
 
-                                            ParkingLocation parkingLocation1 = new ParkingLocation(name, location, distance, cost, image);
-                                            mDatabase.child(user.getUid()).setValue(parkingLocation1);
-                                            mDatabase.child("ParkingLocations").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                            mDatabase = FirebaseDatabase.getInstance().getReference("ParkingLocations");
+
+                                            ParkingLocation parkingLocation1 = new ParkingLocation(name,location,distance,cost,image);
+                                            //mDatabase.child(user.getUid()).setValue(parkingLocation1);
+                                            mDatabase.child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                     .setValue(parkingLocation1).addOnCompleteListener(new OnCompleteListener<Void>() {
+
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
+
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(context, R.string.success_notif, Toast.LENGTH_SHORT).show();
-
-
-
-                                                        // send a notification to the user if the lot information is sent successfully
                                                         Notification notification = new Notification.Builder(context)
-
-
                                                                 .setTicker(context.getString(R.string.not))
                                                                 .setContentTitle(context.getString(R.string.reserved_aspot) + name)
-                                                                .setContentText("Slot 1A booked! Please proceed to Payment after selecting your Parking Pass...")
+                                                                .setContentText(context.getString(R.string.check_pass))
                                                                 .setSmallIcon(R.drawable.logo)
                                                                 .build();
 
-
                                                         notification.flags = Notification.FLAG_AUTO_CANCEL;
-                                                        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+                                                        NotificationManager notificationManager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
                                                         notificationManager.notify(0, notification);
-
-
                                                     } else {
                                                         Toast.makeText(context, R.string.data_err, Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
+
                                             });
+
 
                                             AdminControl status = new AdminControl();
                                             TextView s1 = view.findViewById(R.id.textSlot1);
