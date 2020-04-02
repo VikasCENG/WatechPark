@@ -16,10 +16,10 @@ from adafruit_motor import servo
 #Firebase initialization
 global db
 config = {
-    "apiKey": "AIzaSyBHz-ZrX8ANSYz3qcVdbjQ_KvpX8Kz3PnU",
-    "authDomain": "watechpark.firebaseapp.com",
-    "databaseURL": "https://watechpark.firebaseio.com",
-    "storageBucket": "watechpark.appspot.com"
+    "apiKey": "",
+    "authDomain": "",
+    "databaseURL": "",
+    "storageBucket": ""
 }
 firebase = pyrebase.initialize_app(config)
 db = firebase.database()
@@ -50,12 +50,22 @@ def extGate():
 
 
 def camSen():
-    return "1A5-E8K"
+    return "1A6-E81"
 
 def licCheck():
     incommingCar = camSen()
-    getstat = db.child("Cars").get("lplate")
-    print(getstat)
+    getstat = db.child("Cars").get()
+    for user in getstat.each():
+        userid = user.key()
+        platVal = user.val()["lplate"]
+        #print(platVal)
+        if(platVal==incommingCar):
+            return 1
+    return 0
+
+
+
+
 
 
 #Variable Initialziations
@@ -113,7 +123,7 @@ try:
             print("Vehicle currently not detected at entry")
         if(eStat.val()["lotStatus"]==0):
             print("Lot is full, all spots are occupied!")
-        if(entG==0):
+        if(entG==0 and (licCheck()==1)):
             print("Vehicle detected at entry")
             entGate()
             db.child("GateStatus").set(entry)
@@ -141,14 +151,14 @@ try:
             print("Proximity of Sensor 1 : %d" %prox)
             print(bool(open1))
             #TODO: Pair with an if statement to avoid updating the database when there is no change
-            db.child("ProximityData").set(b)
+            #db.child("ProximityData").set(b)
         elif(prox>=5000):
             #no car is around
             print("\nSlot 1A is currently occupied")
             print("Proximity of Sensor 1 : %d" %prox)
             print(bool(occupied1))
             #TODO: Pair with an if statement to avoid updating the database when there is no change
-            db.child("ProximityData").set(a)
+            #db.child("ProximityData").set(a)
         adminC = db.child("AdminControl").get()
         if(adminC.val()["adminStatus"]==1):
             entGate()
